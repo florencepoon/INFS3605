@@ -1,12 +1,12 @@
 package com.example.infs3605;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -23,8 +23,20 @@ public class LoginActivity extends AppCompatActivity {
     //Declarations
     private FirebaseAuth mAuth;
     final static String TAG = "LoginActivity";
-    public static final INTENT_MESSAGE = "intent_message";
 
+    private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
+            new FirebaseAuthUIActivityResultContract(),
+            new ActivityResultCallback<FirebaseAuthUIAuthenticationResult>() {
+                @Override
+                public void onActivityResult(FirebaseAuthUIAuthenticationResult result) {
+                    onSignInResult(result);
+                }
+            }
+    );
+    void launchMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +60,24 @@ public class LoginActivity extends AppCompatActivity {
             // Launch MainActivity
             launchMainActivity();
         }
-
     }
+
+        private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
+            IdpResponse response = result.getIdpResponse();
+            if (result.getResultCode() == RESULT_OK) {
+                // Successfully signed in
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                // launch MainActivity
+                launchMainActivity();
+            } else {
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
+                System.out.println(response.getError().getErrorCode() + "Authentication failed");
+                Log.d(TAG, "Authentication failed");
+            }
+        }
+
 
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
