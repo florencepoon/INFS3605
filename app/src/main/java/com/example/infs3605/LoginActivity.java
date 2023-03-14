@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
             }
     );
     void launchMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
     }
     @Override
