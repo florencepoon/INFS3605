@@ -1,15 +1,9 @@
 <resources>
     <string name="app_name">INFS3605</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Get started for free ></string>
-    <string name="previous">Previous</string>
 
+    //Landing Page
     <string name="app_title">APP NAME</string>
-    <string name="title_activity_landing_page">Landing_page</string>
-    <string name="app_slogan">Insert slogan</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="slogan">catchy phrase</string>
+    <string name="text_landingButton">Get started for free ></string>
 
 </resources>
