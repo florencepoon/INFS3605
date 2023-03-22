@@ -4,22 +4,31 @@
 
     <item
         android:id="@+id/Dashboard"
+        android:enabled="true"
         android:icon="@drawable/dashboard"
-        android:title="Dashboard" />
+        android:title="@string/dashboard" />
 
-    <item android:title="Insights"
+    <item
         android:id="@+id/Insights"
-        android:icon="@drawable/insights"/>
+        android:enabled="true"
+        android:icon="@drawable/insights"
+        android:title="@string/insights" />
 
-    <item android:title="Home"
+    <item
         android:id="@+id/Home"
-        android:icon="@drawable/home"/>
+        android:enabled="true"
+        android:icon="@drawable/home"
+        android:title="@string/home" />
 
-    <item android:title="Settings"
+    <item
         android:id="@+id/Settings"
-        android:icon="@drawable/settings"/>
+        android:enabled="true"
+        android:icon="@drawable/settings"
+        android:title="@string/settings" />
 
-    <item android:title="Profile"
+    <item
         android:id="@+id/Profile"
-        android:icon="@drawable/profile"/>
+        android:enabled="true"
+        android:icon="@drawable/profile"
+        android:title="@string/profile" />
 </menu>
