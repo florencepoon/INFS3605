@@ -67,7 +67,7 @@
         android:textColor="#222222"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/text_landingButton" />
+        android:text="@string/text_landingButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
