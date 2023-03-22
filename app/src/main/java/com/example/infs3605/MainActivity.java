@@ -6,43 +6,46 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.widget.Switch;
+import com.example.infs3605.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    MainActivityBinding binding;
+    ActivityMainBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = MainActivityBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
 
                 case R.id.Home:
-                    replaceFragment();
+                    replaceFragment(new Home());
                     break;
 
                 case R.id.Profile:
+                    replaceFragment(new Profile());
                     break;
 
                 case R.id.Insights:
+                    replaceFragment(new Insights());
                     break;
 
                 case R.id.Settings:
+                    replaceFragment(new Settings());
                     break;
 
                 case R.id.Dashboard:
+                    replaceFragment(new Dashboard());
                     break;
-
             }
 
             return true;
         });
+    }
 
         private void replaceFragment(Fragment fragment){
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -51,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         }
 
-    }
 }
 
 
