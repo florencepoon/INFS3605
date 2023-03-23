@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".Home">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/textView2"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/testChart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="168dp"
-        android:layout_marginTop="312dp"
+        android:layout_marginTop="292dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
