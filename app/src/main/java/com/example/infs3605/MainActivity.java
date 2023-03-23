@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        replaceFragment(new Home());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
@@ -34,13 +35,6 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new Insights());
                     break;
 
-                case R.id.Settings:
-                    replaceFragment(new Settings());
-                    break;
-
-                case R.id.Dashboard:
-                    replaceFragment(new Dashboard());
-                    break;
             }
 
             return true;
