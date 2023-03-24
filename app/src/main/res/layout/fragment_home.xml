@@ -8,10 +8,10 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/testChart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="292dp"
+        android:layout_width="323dp"
+        android:layout_height="345dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="192dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
