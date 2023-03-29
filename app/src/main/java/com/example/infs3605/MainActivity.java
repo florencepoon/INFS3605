@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new Home());
+        replaceFragment(new Dashboard());
 
         BottomNavigationView mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         mBottomNavigationView.getMenu().findItem(R.id.Home).setChecked(true);
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.Home:
-                    replaceFragment(new Home());
+                    replaceFragment(new Dashboard());
                     break;
 
                 case R.id.Profile:
@@ -36,7 +36,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.Insights:
-                    replaceFragment(new Insights());
+                    replaceFragment(new Analytics());
+                    break;
+
+                case R.id.Events:
+                    replaceFragment(new Events());
                     break;
 
             }
