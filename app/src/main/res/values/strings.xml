@@ -5,16 +5,23 @@
     <string name="app_title">APP NAME</string>
     <string name="slogan">catchy phrase</string>
     <string name="text_landingButton">Get started for free ></string>
-    <string name="hello_home_fragment">Hello home fragment</string>
-    <string name="hello_settings_fragment">Hello settings fragment</string>
-    <string name="hello_insights_fragment">Hello insights fragment</string>
 
     //Dashboard
     <string name="dashboard">Dashboard</string>
+    <string name="dashboard_greeting">Hello</string>
 
     //Events
     <string name="events">Events</string>
-
+    <string name="Upload">Upload</string>
+    <string name="addEvent">Add Event</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_organiser"> Event Organiser</string>
+    <string name="event_category">Event Category</string>
+    <string name="event_participation">Participation</string>
+    <string name="event_location">Location</string>
+    <string name="event_date">Date: </string>
+    <string name="event_startTime">Start time:</string>
+    <string name="event_endTime">End Time:</string>
 
     //Analytics
     <string name="analytics">Analytics</string>
@@ -25,5 +32,7 @@
     <string name="user">FirstName LastName</string>
     <string name="logout">LOGOUT</string>
     <string name="help">Help/Support</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

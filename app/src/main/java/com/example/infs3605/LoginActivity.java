@@ -3,6 +3,7 @@ package com.example.infs3605;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Declarations
     private FirebaseAuth mAuth;
+    private TextView greeting;
     final static String TAG = "LoginActivity";
 
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
@@ -60,6 +62,9 @@ public class LoginActivity extends AppCompatActivity {
             // Launch MainActivity
             launchMainActivity();
         }
+
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        greeting.setText("Hello, " + user.getDisplayName() + "!");
     }
 
         private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
