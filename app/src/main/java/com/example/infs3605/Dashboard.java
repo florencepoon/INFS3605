@@ -1,5 +1,6 @@
 package com.example.infs3605;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 
 public class Dashboard extends Fragment {
     private PieChart piechart;
+    private Button addEventButton;
 
 
     public Dashboard() {
@@ -35,6 +38,14 @@ public class Dashboard extends Fragment {
         piechart = v.findViewById(R.id.testChart);
         setupPieChart();
         loadPieChartData();
+        addEventButton = v.findViewById(R.id.AddEventButton);
+        addEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), addNewEvent.class);
+                startActivity(intent);
+            }
+        });
         return v;
         // Inflate the layout for this fragment
     }
