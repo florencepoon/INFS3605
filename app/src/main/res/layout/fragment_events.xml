@@ -1,72 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Events">
 
     <Button
         android:id="@+id/byOrganiser"
-        android:layout_width="215dp"
-        android:layout_height="52dp"
-        android:layout_marginHorizontal="99dp"
-        android:layout_marginVertical="450dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="229dp"
         android:backgroundTint="#2B3244"
         android:fontFamily="@font/inder"
         android:text="By Organiser"
         android:textColor="@color/off_white"
         android:textColorLink="#2B3244"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/byLocation" />
 
     <Button
         android:id="@+id/byLocation"
-        android:layout_width="215dp"
-        android:layout_height="52dp"
-        android:layout_marginHorizontal="99dp"
-        android:layout_marginVertical="350dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="48dp"
         android:backgroundTint="#2B3244"
         android:fontFamily="@font/inder"
         android:text="By Location"
         android:textColor="@color/off_white"
         android:textColorLink="#2B3244"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/byOrganiser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/byType" />
 
     <Button
         android:id="@+id/byType"
-        android:layout_width="215dp"
-        android:layout_height="52dp"
-        android:layout_marginHorizontal="99dp"
-        android:layout_marginVertical="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="48dp"
         android:backgroundTint="#2B3244"
         android:fontFamily="@font/inder"
         android:text="By Type"
         android:textColor="@color/off_white"
         android:textColorLink="#2B3244"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/byLocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/byName" />
 
     <Button
         android:id="@+id/byName"
-        android:layout_width="215dp"
-        android:layout_height="52dp"
-        android:layout_marginHorizontal="99dp"
-        android:layout_marginVertical="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="48dp"
         android:backgroundTint="#2B3244"
         android:fontFamily="@font/inder"
         android:text="By Name"
         android:textColor="@color/off_white"
         android:textColorLink="#2B3244"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/byType"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="104dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="160sp"
-        android:layout_marginVertical="30sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="82dp"
         android:fontFamily="@font/inder"
         android:text="@string/events"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/byName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

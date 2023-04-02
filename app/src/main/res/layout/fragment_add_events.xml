@@ -190,6 +190,8 @@
         android:layout_height="37sp"
         android:layout_marginHorizontal="39sp"
         android:layout_marginVertical="20sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintStart_toEndOf="@+id/textView"
