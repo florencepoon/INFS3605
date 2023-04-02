@@ -1,5 +1,8 @@
 package com.example.infs3605;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Event {
     //attributes
     private Integer eventID;
@@ -116,4 +119,6 @@ public class Event {
     public void setEventComments(String EventComments) {
         this.eventComments = eventComments;
     }
+
+
 }
