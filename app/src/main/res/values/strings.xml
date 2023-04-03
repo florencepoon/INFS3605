@@ -2,7 +2,7 @@
     <string name="app_name">INFS3605</string>
 
     //Landing Page
-    <string name="app_title">APP NAME</string>
+    <string name="app_title">EventsHub</string>
     <string name="slogan">catchy phrase</string>
     <string name="text_landingButton">Get started for free ></string>
 

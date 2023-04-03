@@ -60,7 +60,7 @@
         android:layout_marginVertical="550dp"
         android:backgroundTint="#2B3244"
         android:fontFamily="@font/inder"
-        android:onClick="logOut"
+        android:onClick="onClick"
         android:text="@string/logout"
         android:textColor="@color/off_white"
         android:textColorLink="#2B3244"
