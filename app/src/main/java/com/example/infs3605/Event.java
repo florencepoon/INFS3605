@@ -10,6 +10,7 @@ public class Event {
     private String eventOrganiser;
     private String eventCategory;
     private String eventParticipation;
+
     private String eventLocation;
     private String eventDate;
     private String eventStartTime;
@@ -20,12 +21,13 @@ public class Event {
 
     // Constructor
     public Event(Integer eventID, String eventName, String eventOrganiser, String eventCategory,
-                 String eventParticipation, String eventDate, String eventStartTime, String eventEndTime) {
+                 String eventParticipation, String eventLocation, String eventDate, String eventStartTime, String eventEndTime) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventOrganiser = eventOrganiser;
         this.eventCategory = eventCategory;
         this.eventParticipation = eventParticipation;
+        this.eventLocation = eventLocation;
         this.eventDate = eventDate;
         this.eventStartTime = eventStartTime;
         this.eventEndTime = eventEndTime;
@@ -68,9 +70,11 @@ public class Event {
         return eventParticipation;
     }
 
-    public void setEventParticipation(String eventParticipation) {
-        this.eventParticipation = eventParticipation;
-    }
+    public void setEventParticipation(String eventParticipation) { this.eventParticipation = eventParticipation; }
+
+    public String getEventLocation() {return eventLocation;}
+
+    public void setEventLocation(String eventLocation) { this.eventLocation = eventLocation; }
 
     public String getEventDate() {
         return eventDate;

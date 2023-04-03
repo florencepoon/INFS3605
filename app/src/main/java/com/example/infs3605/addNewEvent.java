@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class addNewEvent extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    private EditText eventNameText, eventOrganiserText, eventCategoryText, eventParticipationText, eventDateText, eventStartTimeText, eventEndTimeText;
+    private EditText eventNameText, eventOrganiserText, eventCategoryText, eventParticipationText, eventLocationText, eventDateText, eventStartTimeText, eventEndTimeText;
     private Button addNewEventButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class addNewEvent extends AppCompatActivity {
         eventOrganiserText = findViewById(R.id.editTextEventOrganiser);
         eventCategoryText = findViewById(R.id.editTextEventCategory);
         eventParticipationText = findViewById(R.id.editTextParticipation);
+        eventLocationText = findViewById(R.id.editTextLocation);
         eventDateText = findViewById(R.id.editTextDate);
         eventStartTimeText = findViewById(R.id.editTextStartTime);
         eventEndTimeText = findViewById(R.id.editTextEndTime);
@@ -41,7 +42,7 @@ public class addNewEvent extends AppCompatActivity {
 
         public void writeNewEvent() {
         Event event = new Event(1, eventNameText.getText().toString(), eventOrganiserText.getText().toString(), eventCategoryText.getText().toString(),
-                eventParticipationText.getText().toString(), eventDateText.getText().toString(), eventStartTimeText.getText().toString(),
+                eventParticipationText.getText().toString(), eventLocationText.getText().toString(), eventDateText.getText().toString(), eventStartTimeText.getText().toString(),
                 eventEndTimeText.getText().toString());
         mDatabase.child("Events").child(String.valueOf(event.getEventID())).setValue(event);
         }
