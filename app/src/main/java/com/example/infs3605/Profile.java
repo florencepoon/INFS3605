@@ -1,9 +1,7 @@
 package com.example.infs3605;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,10 +25,25 @@ public class Profile extends Fragment {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        Button logout = view.findViewById(R.id.logoutButton);
-        ImageView backButton = view.findViewById(R.id.leftArrowProfile);
+        //Setting display name
+        String displayName = mAuth.getCurrentUser().getDisplayName();
+        TextView name = view.findViewById(R.id.profileName);
+        name.setText(displayName);
+
+        //Help Support Button
+        Button helpButton = view.findViewById(R.id.helpButton);
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "recipient@example.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Help Support");
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+            }
+        });
 
         //Logout Button
+        Button logout = view.findViewById(R.id.logoutButton);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +55,7 @@ public class Profile extends Fragment {
         });
 
         //Back to dashboard button
+        ImageView backButton = view.findViewById(R.id.leftArrowProfile);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
