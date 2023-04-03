@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addNewEvent">
+    tools:context=".AddNewEvent">
 
     <TextView
         android:id="@+id/textView"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/leftArrowProfile2"
+        android:id="@+id/leftArrowCreateEvent"
         android:layout_width="24dp"
         android:layout_height="26dp"
         android:layout_marginHorizontal="21dp"

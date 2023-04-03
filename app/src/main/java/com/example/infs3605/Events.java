@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class Events extends Fragment {
@@ -23,7 +21,7 @@ public class Events extends Fragment {
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), addNewEvent.class);
+                Intent intent = new Intent(getActivity(), AddNewEvent.class);
                 startActivity(intent);
             }
         });

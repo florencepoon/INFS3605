@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,9 @@ public class Profile extends Fragment {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         Button logout = view.findViewById(R.id.logoutButton);
+        ImageView backButton = view.findViewById(R.id.leftArrowProfile);
+
+        //Logout Button
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +37,15 @@ public class Profile extends Fragment {
                 Intent intent = new Intent(getActivity(), LandingPage.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        //Back to dashboard button
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
 

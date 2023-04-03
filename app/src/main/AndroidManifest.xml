@@ -19,7 +19,7 @@
             android:name=".LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".addNewEvent"
+            android:name=".AddNewEvent"
             android:exported="true" />
         <activity
             android:name=".LandingPage"

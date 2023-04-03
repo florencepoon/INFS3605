@@ -17,9 +17,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
-public class eventsRecyclerViewAdapter extends Fragment {
+public class EventsRecyclerViewAdapter extends Fragment {
     private DatabaseReference eventsRef;
     private FirebaseRecyclerAdapter<Event, EventViewHolder> adapter;
 
