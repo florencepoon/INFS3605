@@ -1,6 +1,5 @@
 package com.example.infs3605;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +19,7 @@ public class addNewEvent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_add_events);
+        setContentView(R.layout.fragment_create_events);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         eventNameText = findViewById(R.id.addEventName);
         eventOrganiserText = findViewById(R.id.editTextEventOrganiser);
