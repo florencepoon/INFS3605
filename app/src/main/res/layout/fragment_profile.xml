@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_anchorGravity="bottom"
@@ -9,71 +10,94 @@
 
     <ImageView
         android:id="@+id/profileBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="94dp"
-        android:src="@drawable/profile_rectangle" />
+        android:layout_width="411dp"
+        android:layout_height="178dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/profile_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <ImageView
         android:id="@+id/profileImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="136dp"
-        android:layout_marginVertical="140dp"
-        android:src="@drawable/userprofile" />
+        android:layout_marginTop="64dp"
+        android:src="@drawable/userprofile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profileBackground" />
 
     <TextView
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="65sp"
-        android:layout_marginVertical="30sp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="262dp"
         android:fontFamily="@font/inder"
         android:text="@string/profile"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/leftArrowProfile"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/leftArrowProfile"
-        android:layout_width="24dp"
-        android:layout_height="26dp"
-        android:layout_marginHorizontal="21dp"
-        android:layout_marginVertical="35dp"
-        android:src="@drawable/left_arrow" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="19dp"
+        android:src="@drawable/left_arrow"
+        app:layout_constraintEnd_toStartOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/profileName"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="83dp"
-        android:layout_marginVertical="316dp"
         android:fontFamily="@font/inder"
         android:gravity="center"
         android:text="@string/user"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/helpButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage"
+        app:layout_constraintVertical_bias="0.235" />
 
     <Button
         android:id="@+id/logoutButton"
-        android:layout_width="215dp"
+        android:layout_width="201dp"
         android:layout_height="52dp"
-        android:layout_marginHorizontal="99dp"
-        android:layout_marginVertical="550dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="#2B3244"
         android:fontFamily="@font/inder"
         android:onClick="onClick"
         android:text="@string/logout"
         android:textColor="@color/off_white"
         android:textColorLink="#2B3244"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helpButton" />
 
     <Button
         android:id="@+id/helpButton"
-        android:layout_width="318dp"
-        android:layout_height="49dp"
-        android:layout_marginHorizontal="45dp"
-        android:layout_marginVertical="446dp"
+        android:layout_width="207dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="100dp"
         android:backgroundTint="@color/white"
         android:text="@string/help"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
