@@ -5,7 +5,7 @@
     android:id="@+id/EventDetail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventsDetail" >
+    tools:context=".EventsDetail">
 
     <ImageView
         android:id="@+id/imageView4"
@@ -24,7 +24,7 @@
         android:layout_marginHorizontal="39sp"
         android:layout_marginVertical="20sp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/inder"
         android:text="@string/event_name"
         android:textAlignment="viewStart"
@@ -32,6 +32,21 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="191dp"
+        android:layout_height="22dp"
+        android:layout_marginHorizontal="39sp"
+        android:layout_marginVertical="20sp"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/inder"
+        android:text="Event Organiser"
+        android:textAlignment="viewStart"
+        android:textColor="@color/navy"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        tools:layout_editor_absoluteY="94dp" />
 
     <TextView
         android:id="@+id/textView14"
@@ -70,15 +85,28 @@
         app:layout_constraintStart_toEndOf="@+id/editEventButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="123dp"
-        android:layout_height="41dp"
-        android:text="Button"
-        app:cornerRadius="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="29dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/profile"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="94dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="124dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="#FFDE69"
+        android:fontFamily="@font/inder"
+        android:gravity="center"
+        android:text="Category"
+        android:textColor="#FF000000"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
