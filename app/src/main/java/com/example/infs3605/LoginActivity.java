@@ -69,9 +69,6 @@ public class LoginActivity extends AppCompatActivity {
             // Launch MainActivity
             launchMainActivity();
         }
-
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        greeting.setText("Hello, " + user.getDisplayName() + "!");
     }
 
         private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
