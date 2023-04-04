@@ -3,6 +3,8 @@ package com.example.infs3605;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDate;
+
 public class Event {
     //attributes
     private Integer eventID;
