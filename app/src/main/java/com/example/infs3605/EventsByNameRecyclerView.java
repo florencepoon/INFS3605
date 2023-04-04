@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,16 +19,15 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class EventsByNameRecyclerView extends Fragment {
+public class EventsByNameRecyclerView extends AppCompatActivity {
     private DatabaseReference eventsRef;
     private FirebaseRecyclerAdapter<Event, EventViewHolder> adapter;
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_events_by_name, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.eventsRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
         eventsRef = FirebaseDatabase.getInstance().getReference().child("events");
 
         FirebaseRecyclerOptions<Event> options = new FirebaseRecyclerOptions.Builder<Event>()
@@ -41,6 +41,13 @@ public class EventsByNameRecyclerView extends Fragment {
                 holder.setEventDate(model.getEventDate());
                 holder.setEventLocation(model.getEventLocation());
                 holder.setEventCategory(model.getEventCategory());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        launchEventsDetail();
+                    }
+                });
+
             }
 
             @NonNull
@@ -89,13 +96,8 @@ public class EventsByNameRecyclerView extends Fragment {
     }
 
     public void launchEventsDetail() {
-        Intent intent = new Intent(getActivity(), EventsDetail.class);
+        Intent intent = new Intent(this, EventsDetail.class);
         startActivity(intent);
     }
-
-    public void onItemClick() {
-        launchEventsDetail();
-    }
-
 }
 
