@@ -26,7 +26,14 @@
     <string name="filter_byOrganiser">By Organiser</string>
     <string name="filter_byLocation">By Location</string>
     <string name="filter_byType">By Type</string>
+
+    //Events - Filters by Type
     <string name="filter">Filter by</string>
+    <string name="conference">Conference</string>
+    <string name="competition">Competition</string>
+    <string name="practicum">Practicum</string>
+    <string name="workshop">Workshop</string>
+    <string name="seminar">Seminar</string>
 
     //Analytics
     <string name="analytics">Analytics</string>
