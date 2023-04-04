@@ -19,8 +19,8 @@
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="245dp"
+        android:layout_height="22dp"
         android:layout_marginHorizontal="39sp"
         android:layout_marginVertical="20sp"
         android:layout_marginStart="16dp"
@@ -32,21 +32,6 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="191dp"
-        android:layout_height="22dp"
-        android:layout_marginHorizontal="39sp"
-        android:layout_marginVertical="20sp"
-        android:layout_marginStart="4dp"
-        android:fontFamily="@font/inder"
-        android:text="Event Organiser"
-        android:textAlignment="viewStart"
-        android:textColor="@color/navy"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        tools:layout_editor_absoluteY="94dp" />
 
     <TextView
         android:id="@+id/textView14"
@@ -98,15 +83,113 @@
         android:id="@+id/textView17"
         android:layout_width="124dp"
         android:layout_height="23dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
-        android:background="#FFDE69"
+        android:background="@drawable/rounded_corner_view"
         android:fontFamily="@font/inder"
         android:gravity="center"
         android:text="Category"
         android:textColor="#FF000000"
-        android:textSize="15sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="124dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="#2B3244"
+        android:fontFamily="@font/inder"
+        android:gravity="center"
+        android:text="Participation"
+        android:textColor="#F3EFEF"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="415dp"
+        android:layout_height="373dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="31dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/date_range_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="190dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/inder"
+        android:gravity="center_vertical"
+        android:text="Event Organiser"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="190dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/inder"
+        android:gravity="center_vertical"
+        android:text="Comments"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="190dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/inder"
+        android:gravity="center_vertical"
+        android:text="Date + Time"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="190dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/inder"
+        android:gravity="center_vertical"
+        android:text="Location"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="24dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/location_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
