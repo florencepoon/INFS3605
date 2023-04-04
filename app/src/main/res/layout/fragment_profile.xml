@@ -84,6 +84,7 @@
         android:textColor="@color/off_white"
         android:textColorLink="#2B3244"
         android:textSize="18sp"
+        app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helpButton" />
@@ -96,6 +97,7 @@
         android:backgroundTint="@color/white"
         android:text="@string/help"
         android:textColor="@color/black"
+        app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImage" />
