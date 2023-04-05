@@ -27,6 +27,28 @@
     <string name="filter_byLocation">By Location</string>
     <string name="filter_byType">By Type</string>
 
+    //Create Events Drop Down Menu
+        <string-array name="dropdown_event_participation">
+            <item>Attendee</item>
+            <item>MC</item>
+            <item>Organiser/Supervisor</item>
+            <item>Researcher</item>
+            <item>Sales/Relationship Builder</item>
+            <item>Speaker</item>
+            <item>Other</item>
+        </string-array>
+
+    <string-array name="dropdown_event_category">
+        <item>Conference/Speaker Panel</item>
+        <item>Seminar</item>
+        <item>Practicum</item>
+        <item>Guest Lecture</item>
+        <item>Relationship Building Activity</item>
+        <item>Shared Research Engagement</item>
+        <item>Alumni Event</item>
+        <item>Other</item>
+    </string-array>
+
     //Events - Filters by Type
     <string name="filter">Filter by</string>
     <string name="conference">Conference</string>
