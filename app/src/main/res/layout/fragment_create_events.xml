@@ -105,22 +105,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="40dp"
                 android:fontFamily="@font/inder"
                 android:text="Event Participation"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toTopOf="@+id/editTextParticipation"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addEventName" />
 
-            <EditText
-                android:id="@+id/editTextParticipation"
+            <Spinner
+                android:id="@+id/dropdownEventParticipation"
                 android:layout_width="345dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/dropdown_event_participation"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
                 android:ems="10"
-                android:hint="@string/event_participation"
                 android:inputType="date"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -132,13 +130,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/inder"
                 android:text="@string/event_organiser"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/editTextEventOrganiser"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextParticipation" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/editTextEventOrganiser"
@@ -233,7 +229,7 @@
                 android:text="@string/event_date"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextEventCategory" />
+                app:layout_constraintTop_toBottomOf="@+id/dropdownEventCategory" />
 
             <EditText
                 android:id="@+id/editTextStartTime"
@@ -246,12 +242,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-            <EditText
-                android:id="@+id/editTextEventCategory"
+            <Spinner
+                android:id="@+id/dropdownEventCategory"
                 android:layout_width="345dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:ems="10"
+                android:entries="@array/dropdown_event_category"
                 android:fontFamily="@font/inder"
                 android:hint="@string/event_category"
                 android:inputType="text"
@@ -269,6 +266,7 @@
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

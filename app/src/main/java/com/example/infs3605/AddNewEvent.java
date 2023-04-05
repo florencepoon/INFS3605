@@ -27,7 +27,7 @@ public class AddNewEvent extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         eventNameText = findViewById(R.id.addEventName);
         eventOrganiserText = findViewById(R.id.editTextEventOrganiser);
-        eventCategoryText = findViewById(R.id.editTextEventCategory);
+        eventCategoryText = findViewById(R.id.dropdownEventCategory);
         eventParticipationText = findViewById(R.id.editTextParticipation);
         eventLocationText = findViewById(R.id.editTextLocation);
         eventDateText = findViewById(R.id.editTextDate);
