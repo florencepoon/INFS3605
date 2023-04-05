@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fd3d5e93-fedd-41ad-972f-c563673a3be4" name="Changes" comment="add logo">
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_events.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_events.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events_detail.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
