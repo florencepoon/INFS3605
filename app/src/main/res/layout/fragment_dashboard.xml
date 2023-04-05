@@ -7,42 +7,6 @@
     tools:context=".Dashboard">
 
     <TextView
-        android:id="@+id/top_three_type"
-        android:layout_width="14dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="15dp"
-        android:text="3."
-        app:layout_constraintStart_toStartOf="@+id/event_type_label"
-        app:layout_constraintTop_toBottomOf="@+id/top_two_type" />
-
-    <TextView
-        android:id="@+id/top_two_type"
-        android:layout_width="14dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="15dp"
-        android:text="2."
-        app:layout_constraintStart_toStartOf="@+id/event_type_label"
-        app:layout_constraintTop_toBottomOf="@+id/top_one_type" />
-
-
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/testChart"
-        android:layout_width="206dp"
-        android:layout_height="201dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="188dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barChart"
-        android:layout_width="206dp"
-        android:layout_height="201dp"
-        android:layout_marginTop="186dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/dashboardGreeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,34 +25,5 @@
         android:text="Add Event"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/event_type_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="12dp"
-        android:text="Event Type Insights"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/testChart" />
-
-    <TextView
-        android:id="@+id/top_one_type"
-        android:layout_width="14dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="10dp"
-        android:text="1."
-        app:layout_constraintStart_toStartOf="@+id/event_type_label"
-        app:layout_constraintTop_toBottomOf="@+id/event_type_label" />
-
-    <TextView
-        android:id="@+id/top_event_types"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/top_one_type"
-        app:layout_constraintTop_toBottomOf="@+id/event_type_label" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,11 +10,11 @@ public class Event {
     private Integer eventID;
     private String eventName;
     private String eventOrganiser;
+    private String eventFaculty;
     private String eventCategory;
     private String eventParticipation;
-
     private String eventLocation;
-    private String eventDate;
+    private long eventDate;
     private String eventStartTime;
     private String eventEndTime;
     private String eventAttachments;
@@ -22,11 +22,12 @@ public class Event {
     private String eventComments;
 
     // Constructor
-    public Event(Integer eventID, String eventName, String eventOrganiser, String eventCategory,
-                 String eventParticipation, String eventLocation, String eventDate, String eventStartTime, String eventEndTime) {
+    public Event(Integer eventID, String eventName, String eventOrganiser, String eventFaculty, String eventCategory,
+                 String eventParticipation, String eventLocation, long eventDate, String eventStartTime, String eventEndTime) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventOrganiser = eventOrganiser;
+        this.eventFaculty = eventFaculty;
         this.eventCategory = eventCategory;
         this.eventParticipation = eventParticipation;
         this.eventLocation = eventLocation;
@@ -60,6 +61,12 @@ public class Event {
         this.eventOrganiser = eventOrganiser;
     }
 
+    public String getEventFaculty() {return eventFaculty; }
+
+    public void setEventFaculty(String eventFaculty) {
+        this.eventFaculty = eventFaculty;
+    }
+
     public String getEventCategory() {
         return eventCategory;
     }
@@ -78,11 +85,11 @@ public class Event {
 
     public void setEventLocation(String eventLocation) { this.eventLocation = eventLocation; }
 
-    public String getEventDate() {
+    public long getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(String eventDate) {
+    public void setEventDate(long eventDate) {
         this.eventDate = eventDate;
     }
 

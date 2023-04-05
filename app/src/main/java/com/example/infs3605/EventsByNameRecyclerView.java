@@ -36,7 +36,7 @@ public class EventsByNameRecyclerView extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull EventViewHolder holder, int position, @NonNull Event model) {
                 holder.setEventName(model.getEventName());
-                holder.setEventDate(model.getEventDate());
+//                holder.setEventDate(model.getEventDate());
                 holder.setEventLocation(model.getEventLocation());
                 holder.setEventCategory(model.getEventCategory());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
