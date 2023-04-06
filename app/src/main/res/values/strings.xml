@@ -15,7 +15,7 @@
     <string name="Upload">Upload</string>
     <string name="addEvent">Add Event</string>
     <string name="event_name">Event Name</string>
-    <string name="event_organiser"> Event Organiser</string>
+    <string name="event_organiser">Event Organiser</string>
     <string name="event_category">Event Category</string>
     <string name="event_participation">Participation</string>
     <string name="event_location">Location</string>
