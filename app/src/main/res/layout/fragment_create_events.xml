@@ -118,15 +118,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addEventName" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/editTextParticipation"
                 android:layout_width="345dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
                 android:ems="10"
-                android:inputType="date"
-                android:text="Event Participation"
+                android:entries="@array/dropdown_event_participation"
+                android:inputType="date|text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -243,15 +243,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/editTextEventCategory"
                 android:layout_width="345dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="28dp"
                 android:ems="10"
+                android:entries="@array/dropdown_event_category"
                 android:fontFamily="@font/inder"
                 android:inputType="text"
-                android:text="@string/event_category"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
