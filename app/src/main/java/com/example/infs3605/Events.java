@@ -37,7 +37,7 @@ public class Events extends Fragment {
         byName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), EventsByNameRecyclerView.class);
+                Intent intent = new Intent(getActivity(), EventsByName.class);
                 startActivity(intent);
             }
         });

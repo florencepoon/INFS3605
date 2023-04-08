@@ -22,7 +22,7 @@
             android:name=".AddNewEvent"
             android:exported="true" />
         <activity
-            android:name=".EventsByNameRecyclerView"
+            android:name=".EventsByName"
             android:exported="true" />
         <activity
             android:name=".LandingPage"
