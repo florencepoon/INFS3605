@@ -22,9 +22,6 @@
             android:name=".AddNewEvent"
             android:exported="true" />
         <activity
-            android:name=".EventsByName"
-            android:exported="true" />
-        <activity
             android:name=".LandingPage"
             android:exported="true">
             <intent-filter>

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,8 +39,13 @@ public class Events extends Fragment {
         byName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), EventsByName.class);
-                startActivity(intent);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack(); // remove the current fragment
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                EventsByName eventsByNameFragment = new EventsByName();
+                fragmentTransaction.replace(R.id.frameLayout2, eventsByNameFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 

@@ -48,8 +48,11 @@ public class EventsDetail extends Fragment {
                 if (dataSnapshot.exists()) {
                     Event event = dataSnapshot.getValue(Event.class);
                     eventNameText.setText(event.getEventName());
-                    eventLocationText.setText(event.getEventLocation());
                     eventCategoryText.setText(event.getEventCategory());
+                    eventParticipationText.setText(event.getEventParticipation());
+                    eventOrganiserText.setText(event.getEventOrganiser());
+                    eventLocationText.setText(event.getEventLocation());
+
                 }
             }
 

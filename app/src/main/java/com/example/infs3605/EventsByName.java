@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,15 +18,16 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class EventsByName extends AppCompatActivity {
+public class EventsByName extends Fragment {
     private DatabaseReference eventsRef;
     private FirebaseRecyclerAdapter<Event, EventViewHolder> adapter;
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_events_by_name, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.eventsRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         eventsRef = FirebaseDatabase.getInstance().getReference().child("events");
 
         FirebaseRecyclerOptions<Event> options = new FirebaseRecyclerOptions.Builder<Event>()
@@ -36,7 +38,7 @@ public class EventsByName extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull EventViewHolder holder, int position, @NonNull Event model) {
                 holder.setEventName(model.getEventName());
-//                holder.setEventDate(model.getEventDate());
+                holder.setEventDate(model.getEventDate());
                 holder.setEventLocation(model.getEventLocation());
                 holder.setEventCategory(model.getEventCategory());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -80,8 +82,9 @@ public class EventsByName extends AppCompatActivity {
             eventName.setText(name);
         }
 
-        private void setEventDate(String date) {
-            eventDate.setText(date);
+        private void setEventDate(long date) {
+            String dateString = String.valueOf(date);
+            eventDate.setText(dateString);
         }
 
         private void setEventLocation(String location) {
@@ -94,7 +97,7 @@ public class EventsByName extends AppCompatActivity {
     }
 
     public void launchEventsDetail() {
-        Intent intent = new Intent(this, EventsDetail.class);
+        Intent intent = new Intent(getActivity(), EventsDetail.class);
         startActivity(intent);
     }
 }
