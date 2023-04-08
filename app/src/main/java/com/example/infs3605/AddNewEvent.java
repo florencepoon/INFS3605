@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +18,8 @@ import java.time.LocalDate;
 public class AddNewEvent extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    private EditText eventNameText, eventOrganiserText, eventFacultyText, eventCategoryText, eventParticipationText, eventLocationText, eventStartTimeText, eventEndTimeText;
+    private EditText eventNameText, eventOrganiserText, eventFacultyText, eventLocationText, eventStartTimeText, eventEndTimeText;
+    private Spinner eventCategorySpinner, eventParticipationSpinner;
     private EditText eventDateText;
     private Button addNewEventButton;
 
@@ -31,8 +33,8 @@ public class AddNewEvent extends AppCompatActivity {
         eventNameText = findViewById(R.id.addEventName);
         eventOrganiserText = findViewById(R.id.editTextEventOrganiser);
         eventFacultyText = findViewById(R.id.editTextEventFaculty);
-        eventCategoryText = findViewById(R.id.editTextEventCategory);
-        eventParticipationText = findViewById(R.id.editTextParticipation);
+        eventCategorySpinner = findViewById(R.id.editTextEventCategory);
+        eventParticipationSpinner = findViewById(R.id.editTextParticipation);
         eventLocationText = findViewById(R.id.editTextLocation);
         eventDateText = findViewById(R.id.editTextDate);
         eventStartTimeText = findViewById(R.id.editTextStartTime);
@@ -57,8 +59,8 @@ public class AddNewEvent extends AppCompatActivity {
         }
 
         public void writeNewEvent() {
-        Event event = new Event(11, eventNameText.getText().toString(), eventOrganiserText.getText().toString(), eventFacultyText.getText().toString(), eventCategoryText.getText().toString(),
-                eventParticipationText.getText().toString(), eventLocationText.getText().toString(), Long.parseLong(eventDateText.getText().toString()), eventStartTimeText.getText().toString(),
+        Event event = new Event(11, eventNameText.getText().toString(), eventOrganiserText.getText().toString(), eventFacultyText.getText().toString(), eventCategorySpinner.getSelectedItem().toString(),
+                eventParticipationSpinner.getSelectedItem().toString(), eventLocationText.getText().toString(), Long.parseLong(eventDateText.getText().toString()), eventStartTimeText.getText().toString(),
                 eventEndTimeText.getText().toString());
         mDatabase.child("Events").child(String.valueOf(event.getEventID())).setValue(event);
         }
