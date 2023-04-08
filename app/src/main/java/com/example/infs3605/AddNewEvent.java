@@ -2,6 +2,7 @@ package com.example.infs3605;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -64,4 +65,5 @@ public class AddNewEvent extends AppCompatActivity {
                 eventEndTimeText.getText().toString());
         mDatabase.child("Events").child(String.valueOf(event.getEventID())).setValue(event);
         }
-    }
+
+}
