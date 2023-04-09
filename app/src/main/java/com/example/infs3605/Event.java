@@ -1,9 +1,5 @@
 package com.example.infs3605;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Event {
@@ -22,6 +18,8 @@ public class Event {
     private String	eventLinks;
     private String eventComments;
 
+    public Event() {
+    }
     // Constructor
     public Event(Integer eventID, String eventName, String eventOrganiser, String eventFaculty, String eventCategory,
                  String eventParticipation, String eventLocation, Date eventDate, String eventStartTime, String eventEndTime) {

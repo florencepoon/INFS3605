@@ -12,6 +12,91 @@
         android:layout_height="match_parent"
         tools:context=".Analytics">
 
+        <TextView
+            android:id="@+id/top_one_organiser_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="XX"
+            android:textSize="18sp"
+            android:background="@drawable/layoutborder"
+            app:layout_constraintStart_toEndOf="@+id/top_one_organiser_name"
+            app:layout_constraintTop_toTopOf="@+id/top_one_organiser_name" />
+
+        <TextView
+            android:id="@+id/top_three_organiser_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XX"
+            android:textSize="18sp"
+            android:background="@drawable/layoutborder"
+            app:layout_constraintStart_toEndOf="@+id/top_three_organiser_name"
+            app:layout_constraintStart_toStartOf="@+id/top_one_organiser_count"
+            app:layout_constraintTop_toTopOf="@+id/top_three_organiser_name" />
+
+        <TextView
+            android:id="@+id/top_two_organiser_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XX"
+            android:textSize="18sp"
+            android:background="@drawable/layoutborder"
+            app:layout_constraintStart_toEndOf="@+id/top_one_organiser_name"
+            app:layout_constraintStart_toStartOf="@+id/top_one_organiser_count"
+            app:layout_constraintTop_toTopOf="@+id/top_two_organiser_name2" />
+
+        <TextView
+            android:id="@+id/top_two_organiser_name2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Organiser Two"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/top_two_organiser_label"
+            app:layout_constraintTop_toTopOf="@+id/top_two_organiser_label" />
+
+        <TextView
+            android:id="@+id/top_three_organiser_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Organiser Three"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/top_three_organiser_label"
+            app:layout_constraintTop_toTopOf="@+id/top_three_organiser_label" />
+
+        <TextView
+            android:id="@+id/top_one_organiser_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Organiser One"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/top_one_organiser_label"
+            app:layout_constraintTop_toTopOf="@+id/top_one_organiser_label" />
+
+        <TextView
+            android:id="@+id/top_three_organiser_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:text="3."
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_two_organiser_label" />
+
+        <TextView
+            android:id="@+id/top_two_organiser_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:text="2."
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_one_organiser_label" />
+
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/faculty_bar_chart"
             android:layout_width="377dp"
@@ -28,11 +113,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="100dp"
             android:text="Faculty Insights"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_three_organisers" />
+            app:layout_constraintTop_toBottomOf="@+id/top_one_organiser_label" />
 
         <TextView
             android:id="@+id/textView20"
@@ -85,66 +170,85 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="360dp"
-            android:layout_height="153dp"
-            android:layout_marginStart="5dp"
+            android:layout_width="400dp"
+            android:layout_height="152dp"
+            android:layout_marginStart="1dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
             <LinearLayout
-                android:layout_width="137dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/layoutborder"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/events_completed_ytd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="XX" />
+                    android:gravity="center"
+                    android:text="XX"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/events_completed_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="events completed ytd" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="137dp"
+                android:layout_width="110dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/layoutborder"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/events_this_week"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="XX" />
+                    android:gravity="center"
+                    android:text="XX"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/events_this_week_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="events this week" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="137dp"
+                android:layout_width="110dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/layoutborder"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/events_upcoming_eoy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="XX" />
+                    android:gravity="center"
+                    android:text="XX"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/events_upcoming_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="events upcoming to eoy" />
             </LinearLayout>
         </LinearLayout>
@@ -154,7 +258,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="18dp"
             android:text="Event Type Insights"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -165,26 +269,27 @@
             android:layout_width="377dp"
             android:layout_height="301dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/locationBarChart"
             android:layout_width="377dp"
-            android:layout_height="400dp"
+            android:layout_height="301dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
         <TextView
-            android:id="@+id/top_three_organisers"
+            android:id="@+id/top_one_organiser_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
-            android:text="TextView"
+            android:text="1."
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
     </androidx.constraintlayout.widget.ConstraintLayout>

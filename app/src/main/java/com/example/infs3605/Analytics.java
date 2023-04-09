@@ -1,6 +1,7 @@
 package com.example.infs3605;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -27,6 +28,8 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -48,14 +51,22 @@ public class Analytics extends Fragment {
     DatabaseReference myRef;
     private PieChart piechart;
 
-    TextView eventsCompletedYTD,topEventTypes, eventsThisWeek, eventsUpcomingEOY;
+    TextView eventsCompletedYTD,topOrganiserLabel1, topOrganiserLabel2, topOrganiserLabel3, topOneOrganiserName, toptwoOrganiserName, topThreeOrganiserName, topOneOrganiserCount, topTwoOrganiserCount, topThreeOrganiserCount, eventsThisWeek, eventsUpcomingEOY;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_analytics, container, false);
-        topEventTypes = view.findViewById(R.id.top_three_organisers);
+        topOrganiserLabel1 = view.findViewById(R.id.top_one_organiser_label);
+        topOrganiserLabel2= view.findViewById(R.id.top_two_organiser_label);
+        topOrganiserLabel3= view.findViewById(R.id.top_three_organiser_label);
+        topOneOrganiserName= view.findViewById(R.id.top_one_organiser_name);
+        toptwoOrganiserName= view.findViewById(R.id.top_two_organiser_name2);
+        topThreeOrganiserName= view.findViewById(R.id.top_three_organiser_name);
+        topOneOrganiserCount= view.findViewById(R.id.top_one_organiser_count);
+        topTwoOrganiserCount= view.findViewById(R.id.top_two_organiser_count);
+        topThreeOrganiserCount= view.findViewById(R.id.top_three_organiser_count);
         eventsCompletedYTD = view.findViewById(R.id.events_completed_ytd);
         eventsThisWeek = view.findViewById(R.id.events_this_week);
         eventsUpcomingEOY = view.findViewById(R.id.events_upcoming_eoy);
@@ -170,6 +181,7 @@ public class Analytics extends Fragment {
                 Map<String, Integer> eventData = new HashMap<>();
 
                 // Iterate through all events and count the number of events for each event type
+                int totalEvents = 0;
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     String eventType = eventSnapshot.child("eventCategory").getValue(String.class);
                     if (eventData.containsKey(eventType)) {
@@ -177,24 +189,40 @@ public class Analytics extends Fragment {
                     } else {
                         eventData.put(eventType, 1);
                     }
+                    totalEvents++;
                 }
+
 
                 // Convert the event data to a List<Entry> for use in MPCharts
                 List<Entry> entries = new ArrayList<>();
                 for (Map.Entry<String, Integer> entry : eventData.entrySet()) {
                     String eventType = entry.getKey();
                     Integer eventCount = entry.getValue();
+                    totalEvents += eventCount;
                     entries.add(new Entry(0, eventCount.floatValue(), eventType));
                 }
 
                 // Create a pie chart using MPCharts
                 PieChart pieChart = view.findViewById(R.id.testChart);
+                // Disable chart description
+                Description description = new Description();
+                description.setText("");
+                pieChart.setDescription(description);
                 PieDataSet dataSet = new PieDataSet(convertEntriesToPieEntries(entries), "Events");
+                dataSet.setValueTextSize(12f);
                 dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                dataSet.setValueLineColor(Color.BLACK);
+                dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
                 PieData data = new PieData(dataSet);
+                data.setValueFormatter(new PercentFormatter());
                 pieChart.setData(data);
                 pieChart.animateXY(1000, 1000);
                 pieChart.invalidate();
+
+                // Hide the legend
+                Legend legend = pieChart.getLegend();
+                legend.setEnabled(false);
+
             }
 
             @Override
@@ -212,7 +240,7 @@ public class Analytics extends Fragment {
             }
         });
 
-        //Method for generating a list of the top event faculties
+        //Method for generating a list of the top event organisers
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -220,8 +248,8 @@ public class Analytics extends Fragment {
 
                 // Count the number of events in each location
                 for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
-                    String eventFaculty = eventSnapshot.child("eventFaculty").getValue(String.class);
-                    eventTypeCount.put(eventFaculty, eventTypeCount.getOrDefault(eventFaculty, 0) + 1);
+                    String eventOrganiser = eventSnapshot.child("eventOrganiser").getValue(String.class);
+                    eventTypeCount.put(eventOrganiser, eventTypeCount.getOrDefault(eventOrganiser, 0) + 1);
                 }
 
                 // Sort the event locations by count in descending order
@@ -229,18 +257,26 @@ public class Analytics extends Fragment {
                 Collections.sort(typeList, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 
                 // Retrieve the top 3 event locations
-                List<String> topEvents = new ArrayList<>();
+                List<String> topOrganisers = new ArrayList<>();
                 for (int i = 0; i < Math.min(typeList.size(), 3); i++) {
-                    topEvents.add(typeList.get(i).getKey());
+                    topOrganisers.add(typeList.get(i).getKey());
                 }
 
-                // Display the top 3 event locations and counts in a TextView
-                StringBuilder stringBuilder = new StringBuilder();
-                for (String eventFaculty : topEvents) {
-                    int count = eventTypeCount.get(eventFaculty);
-                    stringBuilder.append(eventFaculty).append(": ").append(count).append("\n\n");
+                // Display the top 3 event organizers and counts in TextViews
+                for (int i = 0; i < topOrganisers.size(); i++) {
+                    String eventOrganizer = topOrganisers.get(i);
+                    int count = eventTypeCount.get(eventOrganizer);
+                    if (i == 0) {
+                        topOneOrganiserName.setText(eventOrganizer);
+                        topOneOrganiserCount.setText(String.valueOf(count));
+                    } else if (i == 1) {
+                        toptwoOrganiserName.setText(eventOrganizer);
+                        topTwoOrganiserCount.setText(String.valueOf(count));
+                    } else if (i == 2) {
+                        topThreeOrganiserName.setText(eventOrganizer);
+                        topThreeOrganiserCount.setText(String.valueOf(count));
+                    }
                 }
-                topEventTypes.setText(stringBuilder.toString());
             }
 
             @Override
@@ -296,7 +332,7 @@ public class Analytics extends Fragment {
                 // Create a BarData object with the BarDataSet
                 BarData barData = new BarData(dataSet);
 
-                barData.setValueTextSize(16f);
+                barData.setValueTextSize(14f);
 
                 // Set the bar width
                 barData.setBarWidth(0.5f);
@@ -304,7 +340,7 @@ public class Analytics extends Fragment {
                 // Get the BarChart view from the layout
                 BarChart barChart = view.findViewById(R.id.faculty_bar_chart);
                 barChart.getDescription().setEnabled(false);
-                barChart.setDrawValueAboveBar(false);
+                barChart.setDrawValueAboveBar(true);
                 barChart.setMaxVisibleValueCount(60);
                 barChart.setPinchZoom(false);
                 barChart.setDrawGridBackground(false);
@@ -313,7 +349,7 @@ public class Analytics extends Fragment {
                 XAxis xAxis = barChart.getXAxis();
                 xAxis.setDrawGridLines(false);
                 xAxis.setDrawAxisLine(false);
-                xAxis.setDrawLabels(false);
+                xAxis.setDrawLabels(true);
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
                 // Hide the legend
@@ -327,7 +363,7 @@ public class Analytics extends Fragment {
 
                 // Set up the y-axis
                 YAxis leftAxis = barChart.getAxisLeft();
-                leftAxis.setDrawGridLines(false);
+                leftAxis.setDrawGridLines(true);
                 leftAxis.setAxisMinimum(0f);
                 leftAxis.setGranularityEnabled(true);
                 leftAxis.setGranularity(1f);
@@ -383,7 +419,7 @@ public class Analytics extends Fragment {
                 dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
                 BarData data = new BarData(dataSet);
-                data.setValueTextSize(16f);
+                data.setValueTextSize(14f);
                 data.setBarWidth(0.5f);
 
                 BarChart chart = view.findViewById(R.id.locationBarChart);
@@ -399,10 +435,24 @@ public class Analytics extends Fragment {
                 // Get the X and Y axis objects from the chart
                 XAxis xAxis = chart.getXAxis();
                 YAxis yAxis = chart.getAxisLeft();
+                YAxis rightAxis = chart.getAxisRight();
+
+                // Format the Y axis labels to show whole numbers
+                yAxis.setGranularity(1f);
+                yAxis.setValueFormatter(new ValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value) {
+                        // Round the value to the nearest whole number
+                        int roundedValue = Math.round(value);
+                        // Convert the rounded value to a string
+                        return String.valueOf(roundedValue);
+                    }
+                });
 
                 // Disable the grid lines
                 xAxis.setDrawGridLines(false);
-                yAxis.setDrawGridLines(false);
+                yAxis.setDrawGridLines(true);
+                rightAxis.setEnabled(false);
 
                 // Get the legend object from the chart
                 Legend legend = chart.getLegend();

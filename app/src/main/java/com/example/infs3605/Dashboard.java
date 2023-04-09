@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,18 +38,27 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class Dashboard extends Fragment {
 
     private Button addEventButton;
+    private RecyclerView recyclerView;
+    private dashboardAdapter adapter;
+    private RecyclerView.RecyclerListener listener;
+    private List<Event> eventData;
     FirebaseDatabase firebaseDatabase;
-
+    DatabaseReference myRef;
 
     TextView dashboardGreeting;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -58,14 +69,70 @@ public class Dashboard extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        //create handle for RecyclerView
+        recyclerView = v.findViewById(R.id.recycler_view);
+
+        //Initiate a linear recyclerview layout manager
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        //Initiate adapter and pass on list of events
+        adapter = new dashboardAdapter(new ArrayList<Event>(), listener);
+        recyclerView.setAdapter(adapter);
+
+        myRef = FirebaseDatabase.getInstance().getReference().child("Events");
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Event> events = new ArrayList<Event>();
+                String eventName = null;
+                String eventLocation = null;
+                String eventCategory = null;
+                Date eventDate = null;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.child("eventName").getValue() != null) {
+                        eventName = snapshot.child("eventName").getValue(String.class);
+                    }
+                    if (snapshot.child("eventLocation").getValue() != null) {
+                        eventLocation = snapshot.child("eventLocation").getValue(String.class);
+                    }
+                    if (snapshot.child("eventCategory").getValue() != null) {
+                        eventCategory = snapshot.child("eventCategory").getValue(String.class);
+                    }
+                    if (snapshot.child("eventDate").getValue() != null) {
+                        Long eventTime = snapshot.child("eventDate").child("time").getValue(Long.class);
+                        eventDate = new Date(eventTime);
+                    }
+
+                    Event event = new Event();
+                    event.setEventName(eventName);
+                    event.setEventLocation(eventLocation);
+                    event.setEventCategory(eventCategory);
+                    event.setEventDate(eventDate);
+                    events.add(event);
+                }
+
+                // Filter events by dates that fall within the upcoming week
+                long currentTime = Calendar.getInstance().getTimeInMillis();
+                long upcomingWeekTime = currentTime + TimeUnit.DAYS.toMillis(7);
+                List<Event> upcomingEvents = new ArrayList<>();
+                for (Event event: events) {
+                    if (event.getEventDate().getTime() >= currentTime && event.getEventDate().getTime() <= upcomingWeekTime) {
+                        upcomingEvents.add(event);
+                    }
+                }
+                adapter.setData((ArrayList<Event>) upcomingEvents);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
         //Customised greeting
         String displayName = mAuth.getCurrentUser().getDisplayName();
         TextView name = v.findViewById(R.id.dashboardGreeting);
         name.setText("Welcome, " + displayName + "!");
 
-//        piechart = v.findViewById(R.id.testChart);
-//        setupPieChart();
-//        loadPieChartData();
         addEventButton = v.findViewById(R.id.AddEventButton);
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
