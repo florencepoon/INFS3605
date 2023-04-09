@@ -276,6 +276,7 @@
                 android:layout_marginStart="28dp"
                 android:ems="10"
                 android:inputType="date"
+                android:hint="Event Date (yyyy-MM-dd)"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 

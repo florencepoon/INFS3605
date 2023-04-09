@@ -4,6 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Event {
     //attributes
@@ -14,7 +15,7 @@ public class Event {
     private String eventCategory;
     private String eventParticipation;
     private String eventLocation;
-    private long eventDate;
+    private Date eventDate;
     private String eventStartTime;
     private String eventEndTime;
     private String eventAttachments;
@@ -23,7 +24,7 @@ public class Event {
 
     // Constructor
     public Event(Integer eventID, String eventName, String eventOrganiser, String eventFaculty, String eventCategory,
-                 String eventParticipation, String eventLocation, long eventDate, String eventStartTime, String eventEndTime) {
+                 String eventParticipation, String eventLocation, Date eventDate, String eventStartTime, String eventEndTime) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventOrganiser = eventOrganiser;
@@ -85,11 +86,11 @@ public class Event {
 
     public void setEventLocation(String eventLocation) { this.eventLocation = eventLocation; }
 
-    public long getEventDate() {
+    public Date getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(long eventDate) {
+    public void setEventDate(Date eventDate) {
         this.eventDate = eventDate;
     }
 

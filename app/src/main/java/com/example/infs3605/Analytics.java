@@ -36,7 +36,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +48,7 @@ public class Analytics extends Fragment {
     DatabaseReference myRef;
     private PieChart piechart;
 
-    TextView topEventTypes;
+    TextView eventsCompletedYTD,topEventTypes, eventsThisWeek, eventsUpcomingEOY;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -54,6 +56,108 @@ public class Analytics extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_analytics, container, false);
         topEventTypes = view.findViewById(R.id.top_three_organisers);
+        eventsCompletedYTD = view.findViewById(R.id.events_completed_ytd);
+        eventsThisWeek = view.findViewById(R.id.events_this_week);
+        eventsUpcomingEOY = view.findViewById(R.id.events_upcoming_eoy);
+
+        //method for counting the number of completed events
+        // Get a reference to the Firebase database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        // Get a reference to the "events" node in the database
+        myRef = FirebaseDatabase.getInstance().getReference().child("Events");
+
+        // Get the current date and time
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+
+        // Attach a listener to the events reference to read the event data
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int completedEvents = 0;
+                // Iterate over all events in the snapshot
+                for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
+                    // Get the event date from the snapshot
+                    Long eventDateTime = eventSnapshot.child("eventDate").child("time").getValue(Long.class);
+
+                    // Compare the event date with today's date
+                    if (eventDateTime != null) {
+                        Date eventDate = new Date(eventDateTime);
+                        if (eventDate.before(today)) {
+                            // Increment the completed events counter
+                            completedEvents++;
+                        }
+                    }
+                }
+                //Displaying final count after all events have been counted
+                eventsCompletedYTD.setText(String.valueOf(completedEvents));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle any errors that occur while reading from the database
+            }
+        });
+
+        //method for counting events
+        // Get a reference to the events node in Firebase
+        myRef = FirebaseDatabase.getInstance().getReference().child("Events");
+
+        // Get the current date and time
+        Date todayDate = new Date();
+
+        // Get the date of one week from now
+        Calendar calendarYear = Calendar.getInstance();
+        calendarYear.setTime(todayDate);
+        calendarYear.add(Calendar.DATE, 7);
+        Date nextWeek = calendarYear.getTime();
+
+        // Attach a listener to the events reference to read the event data
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int upcomingEventsWeek = 0;
+                int upcomingEventsYear = 0;
+
+                // Iterate over all events in the snapshot
+                for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
+                    // Get the event date from the snapshot
+                    Long eventTime = eventSnapshot.child("eventDate").child("time").getValue(Long.class);
+
+                    if (eventTime != null) {
+                        Date eventDate = new Date(eventTime);
+                        // Compare the event date with today's date
+                        if (eventDate != null && eventDate.after(today)) {
+                            // Check if the event is within the next week
+                            if (eventDate.before(nextWeek)) {
+                                // Increment the upcoming events within the next week counter
+                                upcomingEventsWeek++;
+                            }
+
+                            // Check if the event is within the next year
+                            Calendar eventCalendar = Calendar.getInstance();
+                            eventCalendar.setTime(eventDate);
+                            int eventYear = eventCalendar.get(Calendar.YEAR);
+                            int currentYear = calendar.get(Calendar.YEAR);
+                            if (eventYear == currentYear) {
+                                // Increment the upcoming events within the current year counter
+                                upcomingEventsYear++;
+                            }
+                        }
+                    }
+
+                }
+                //Displaying final counts after all events have been counted
+                eventsThisWeek.setText(String.valueOf(upcomingEventsWeek));
+                eventsUpcomingEOY.setText(String.valueOf(upcomingEventsYear));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
 
         //method for populating piechart for Event Location Insights
         // Get a reference to the "events" node in your Firebase Realtime Database
@@ -325,79 +429,3 @@ public class Analytics extends Fragment {
         return pieEntries;
     }
 }
-
-//method for completed events
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                List<Integer> completedEventsCount = new ArrayList<>();
-//                int count = 0;
-//
-//                for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
-//                    // Retrieve the event data
-//                    Object eventDateObject = eventSnapshot.child("eventDate").getValue();
-//                    if (eventDateObject instanceof Long) {
-//                        long eventDate = (Long) eventDateObject;
-//                        if (eventDate < System.currentTimeMillis()) {
-//                            count++;
-//                        }
-//                    }
-//                }
-//                completedEventsCount.add(count);
-//
-//                // Use the completedEventsCount data to populate the bar chart
-//                // Get the BarChart view from the layout
-//                BarChart barChart = view.findViewById(R.id.barChart);
-//                barChart.getDescription().setEnabled(false);
-//                barChart.setDrawValueAboveBar(false);
-//                barChart.setMaxVisibleValueCount(60);
-//                barChart.setPinchZoom(false);
-//                barChart.setDrawGridBackground(false);
-//
-//                // Create a list of BarEntry objects for the completed events count
-//                List<BarEntry> completedEventsData = new ArrayList<>();
-//                for (int i = 0; i < completedEventsCount.size(); i++) {
-//                    completedEventsData.add(new BarEntry(i, completedEventsCount.get(i)));
-//                }
-//
-//                // Create a BarDataSet with the completed events data and a label
-//                BarDataSet dataSet = new BarDataSet(completedEventsData, "Completed Events");
-//
-//                // Set the color for the bars
-//                dataSet.setColor(Color.BLUE);
-//
-//                // Create a BarData object with the BarDataSet
-//                BarData barData = new BarData(dataSet);
-//
-//                barData.setValueTextSize(16f);
-//
-//                // Set the bar width
-//                barData.setBarWidth(0.5f);
-//
-//                // Set the X-axis labels with the event names
-//                XAxis xAxis = barChart.getXAxis();
-//                xAxis.setGranularity(1f);
-//                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-//                xAxis.setDrawLabels(false);
-//
-//                // Set up the y-axis
-//                YAxis leftAxis = barChart.getAxisLeft();
-//                leftAxis.setDrawGridLines(true);
-//                leftAxis.setAxisMinimum(0f);
-//                leftAxis.setGranularityEnabled(true);
-//                leftAxis.setGranularity(1f);
-//                leftAxis.setLabelCount(5);
-//
-//                YAxis rightAxis = barChart.getAxisRight();
-//                rightAxis.setDrawGridLines(false);
-//                rightAxis.setEnabled(false);
-//
-//                // Set the chart data and refresh the chart
-//                barChart.setData(barData);
-//                barChart.invalidate();
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                // Handle any errors
-//            }
-//        });

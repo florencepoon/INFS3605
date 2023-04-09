@@ -18,6 +18,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
+
 public class EventsByName extends Fragment {
     private DatabaseReference eventsRef;
     private FirebaseRecyclerAdapter<Event, EventViewHolder> adapter;
@@ -82,7 +84,7 @@ public class EventsByName extends Fragment {
             eventName.setText(name);
         }
 
-        private void setEventDate(long date) {
+        private void setEventDate(Date date) {
             String dateString = String.valueOf(date);
             eventDate.setText(dateString);
         }

@@ -14,7 +14,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class AddNewEvent extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -60,8 +63,19 @@ public class AddNewEvent extends AppCompatActivity {
         }
 
         public void writeNewEvent() {
-        Event event = new Event(11, eventNameText.getText().toString(), eventOrganiserText.getText().toString(), eventFacultyText.getText().toString(), eventCategorySpinner.getSelectedItem().toString(),
-                eventParticipationSpinner.getSelectedItem().toString(), eventLocationText.getText().toString(), Long.parseLong(eventDateText.getText().toString()), eventStartTimeText.getText().toString(),
+
+        String eventDateString = eventDateText.getText().toString();
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date;
+            try {
+                date = dateFormat.parse(eventDateString);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+
+            Event event = new Event(11, eventNameText.getText().toString(), eventOrganiserText.getText().toString(), eventFacultyText.getText().toString(), eventCategorySpinner.getSelectedItem().toString(),
+                eventParticipationSpinner.getSelectedItem().toString(), eventLocationText.getText().toString(), date, eventStartTimeText.getText().toString(),
                 eventEndTimeText.getText().toString());
         mDatabase.child("Events").child(String.valueOf(event.getEventID())).setValue(event);
         }
