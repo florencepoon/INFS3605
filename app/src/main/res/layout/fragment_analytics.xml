@@ -129,8 +129,8 @@
             android:layout_width="377dp"
             android:layout_height="301dp"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView24">
 
@@ -182,7 +182,7 @@
             android:layout_marginHorizontal="65sp"
             android:layout_marginVertical="30sp"
             android:layout_marginStart="19dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/inder"
             android:text="@string/analytics"
             android:textAllCaps="true"
@@ -198,7 +198,7 @@
             android:layout_marginHorizontal="21dp"
             android:layout_marginVertical="35dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/left_arrow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -306,6 +306,8 @@
             android:layout_width="377dp"
             android:layout_height="301dp"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -314,6 +316,8 @@
             android:layout_width="377dp"
             android:layout_height="301dp"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
