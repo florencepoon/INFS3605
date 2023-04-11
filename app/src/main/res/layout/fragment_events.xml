@@ -83,6 +83,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/inder"
         android:text="@string/events"
+        android:textAllCaps="true"
         android:textColor="@color/black"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +94,8 @@
     <ImageView
         android:id="@+id/createEventButton"
         android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="30dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="28dp"
         android:src="@drawable/add_event"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView13" />

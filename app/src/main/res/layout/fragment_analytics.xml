@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F9FF"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,14 +11,30 @@
         android:layout_height="match_parent"
         tools:context=".Analytics">
 
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="377dp"
+            android:layout_height="454dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="160dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/faculty_bar_chart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/locationBarChart"
+            app:layout_constraintVertical_bias="0.147"
+            app:srcCompat="@drawable/navyrec" />
+
         <TextView
             android:id="@+id/top_one_organiser_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="XX"
-            android:textSize="18sp"
             android:background="@drawable/layoutborder"
+            android:text="XX"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/top_one_organiser_name"
             app:layout_constraintTop_toTopOf="@+id/top_one_organiser_name" />
 
@@ -27,9 +42,10 @@
             android:id="@+id/top_three_organiser_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XX"
-            android:textSize="18sp"
             android:background="@drawable/layoutborder"
+            android:text="XX"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/top_three_organiser_name"
             app:layout_constraintStart_toStartOf="@+id/top_one_organiser_count"
             app:layout_constraintTop_toTopOf="@+id/top_three_organiser_name" />
@@ -38,9 +54,10 @@
             android:id="@+id/top_two_organiser_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XX"
-            android:textSize="18sp"
             android:background="@drawable/layoutborder"
+            android:text="XX"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/top_one_organiser_name"
             app:layout_constraintStart_toStartOf="@+id/top_one_organiser_count"
             app:layout_constraintTop_toTopOf="@+id/top_two_organiser_name2" />
@@ -50,8 +67,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:fontFamily="@font/inder"
             android:text="Organiser Two"
-            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/top_two_organiser_label"
             app:layout_constraintTop_toTopOf="@+id/top_two_organiser_label" />
 
@@ -60,8 +79,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:fontFamily="@font/inder"
             android:text="Organiser Three"
-            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/top_three_organiser_label"
             app:layout_constraintTop_toTopOf="@+id/top_three_organiser_label" />
 
@@ -70,10 +91,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:fontFamily="@font/inder"
             android:text="Organiser One"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/top_one_organiser_label"
-            app:layout_constraintTop_toTopOf="@+id/top_one_organiser_label" />
+            app:layout_constraintTop_toTopOf="@+id/top_one_organiser_label"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/top_three_organiser_label"
@@ -81,7 +104,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/inder"
             android:text="3."
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_two_organiser_label" />
@@ -92,7 +117,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/inder"
             android:text="2."
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_one_organiser_label" />
@@ -102,22 +129,25 @@
             android:layout_width="377dp"
             android:layout_height="301dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+            app:layout_constraintTop_toBottomOf="@+id/textView24">
+
+        </com.github.mikephil.charting.charts.BarChart>
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/inder"
             android:text="Faculty Insights"
-            android:textSize="22sp"
+            android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_one_organiser_label" />
+            app:layout_constraintTop_toBottomOf="@+id/top_three_organiser_name" />
 
         <TextView
             android:id="@+id/textView20"
@@ -125,8 +155,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/inder"
             android:text="Organiser Insights"
-            android:textSize="22sp"
+            android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locationBarChart" />
 
@@ -136,8 +168,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/inder"
             android:text="Location Insights"
-            android:textSize="22sp"
+            android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/testChart" />
 
@@ -147,13 +181,14 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="65sp"
             android:layout_marginVertical="30sp"
+            android:layout_marginStart="19dp"
             android:layout_marginTop="28dp"
-            android:layout_marginEnd="148dp"
             android:fontFamily="@font/inder"
             android:text="@string/analytics"
+            android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/leftArrowAnalytics"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -172,9 +207,9 @@
             android:id="@+id/linearLayout2"
             android:layout_width="400dp"
             android:layout_height="152dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="15dp"
+            android:background="#F6F9FF"
+            android:backgroundTint="#F6F9FF"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -259,8 +294,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="18dp"
+            android:fontFamily="@font/inder"
             android:text="Event Type Insights"
-            android:textSize="22sp"
+            android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
@@ -269,7 +306,6 @@
             android:layout_width="377dp"
             android:layout_height="301dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -278,7 +314,6 @@
             android:layout_width="377dp"
             android:layout_height="301dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -288,9 +323,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/inder"
             android:text="1."
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -41,6 +41,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/inder"
         android:text="Event Details"
+        android:textAllCaps="true"
         android:textColor="@color/black"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +53,7 @@
         android:id="@+id/editEventButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/baseline_edit_24"
         app:layout_constraintStart_toEndOf="@+id/textView14"
@@ -62,6 +63,7 @@
         android:id="@+id/deleteEventButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/baseline_delete_24"
@@ -95,7 +97,22 @@
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/eventsParticipationDetail"
+        android:layout_width="124dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="@color/light_blue"
+        android:fontFamily="@font/inder"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventsParticipationDetail2"
+        tools:text="Event Faculty" />
+
+    <TextView
+        android:id="@+id/eventsParticipationDetail2"
         android:layout_width="124dp"
         android:layout_height="23dp"
         android:layout_marginTop="12dp"
