@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Dashboard">
 
+    <ImageView
+        android:id="@+id/profileImage2"
+        android:layout_width="64dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/userprofile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView17"
         android:layout_width="168dp"

@@ -16,7 +16,7 @@
         android:layout_marginHorizontal="57sp"
         android:layout_marginVertical="28sp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/inder"
         android:text="@string/addEvent"
         android:textAllCaps="true"
@@ -32,7 +32,7 @@
         android:layout_marginHorizontal="21dp"
         android:layout_marginVertical="35dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/left_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
