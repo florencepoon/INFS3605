@@ -97,6 +97,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <TextView
+        android:id="@+id/eventsFacultyDetail"
         android:layout_width="124dp"
         android:layout_height="23dp"
         android:layout_marginTop="12dp"
@@ -108,11 +109,11 @@
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventsParticipationDetail2"
+        app:layout_constraintTop_toBottomOf="@+id/eventsParticipationDetail"
         tools:text="Event Faculty" />
 
     <TextView
-        android:id="@+id/eventsParticipationDetail2"
+        android:id="@+id/eventsParticipationDetail"
         android:layout_width="124dp"
         android:layout_height="23dp"
         android:layout_marginTop="12dp"

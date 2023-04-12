@@ -131,7 +131,7 @@ public class Dashboard extends Fragment {
         //Customised greeting
         String displayName = mAuth.getCurrentUser().getDisplayName();
         TextView name = v.findViewById(R.id.dashboardGreeting);
-        name.setText("Welcome, " + displayName + "!");
+        name.setText("Welcome back, " + displayName + "!");
 
         addEventButton = v.findViewById(R.id.AddEventButton);
         addEventButton.setOnClickListener(new View.OnClickListener() {
