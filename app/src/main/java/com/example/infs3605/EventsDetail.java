@@ -24,7 +24,7 @@ public class EventsDetail extends Fragment {
     private ValueEventListener eventListener;
     private TextView eventNameText, eventCategoryText, eventParticipationText, eventOrganiserText, eventLocationText, eventStartTimeText, eventDateText;
     private String eventId = getArguments().getString("eventId");
-    DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("events").child(eventId);
+    DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("Events").child(eventId);
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class EventsDetail extends Fragment {
                     eventParticipationText.setText(event.getEventParticipation());
                     eventOrganiserText.setText(event.getEventOrganiser());
                     eventLocationText.setText(event.getEventLocation());
-
+                    eventStartTimeText.setText(event.getEventStartTime());
                 }
             }
 
