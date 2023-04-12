@@ -235,4 +235,15 @@
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="374dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/rounded_corner_view"
+        android:gravity="center_vertical"
+        android:text="Comments"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        tools:layout_editor_absoluteY="216dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
