@@ -220,6 +220,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:background="@drawable/layoutborder"
+                android:backgroundTint="#2B3244"
                 android:orientation="vertical">
 
                 <TextView
@@ -228,6 +229,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="XX"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -236,7 +238,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="events completed ytd" />
+                    android:text="events completed ytd"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
 
             <LinearLayout
@@ -244,6 +247,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:background="@drawable/layoutborder"
+                android:backgroundTint="#2B3244"
                 android:orientation="vertical">
 
                 <TextView
@@ -252,6 +256,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="XX"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -260,7 +265,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="events this week" />
+                    android:text="events this week"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
 
             <LinearLayout
@@ -268,6 +274,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:background="@drawable/layoutborder"
+                android:backgroundTint="#2B3244"
                 android:orientation="vertical">
 
                 <TextView
@@ -276,6 +283,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="XX"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -284,7 +292,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="events upcoming to eoy" />
+                    android:text="events upcoming to eoy"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
 
