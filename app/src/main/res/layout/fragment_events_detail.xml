@@ -88,6 +88,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_corner_view"
+        android:backgroundTint="@color/yellow"
         android:fontFamily="@font/inder"
         android:gravity="center"
         android:text="@string/event_category"
@@ -182,7 +183,7 @@
         android:layout_marginStart="4dp"
         android:fontFamily="@font/inder"
         android:gravity="center_vertical"
-        android:text="Date + Time"
+        android:text="Date"
         android:textColor="#000000"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/imageView9"
@@ -199,6 +200,19 @@
         android:textColor="#000000"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="190dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/inder"
+        android:gravity="center_vertical"
+        android:text="Time"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/eventsDateTimeDetail" />
 
     <ImageView
@@ -209,6 +223,31 @@
         android:layout_marginTop="4dp"
         android:src="@drawable/location_icon"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="28dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/time_icon"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="372dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_corner_view"
+        android:gravity="center_vertical"
+        android:text="Comments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/eventsLocationDetail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
