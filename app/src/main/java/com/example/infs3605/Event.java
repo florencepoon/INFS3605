@@ -15,11 +15,12 @@ public class Event {
     private String eventStartTime;
     private String eventEndTime;
     private String eventAttachments;
-    private String	eventLinks;
+    private String eventLinks;
     private String eventComments;
 
     public Event() {
     }
+
     // Constructor
     public Event(Integer eventID, String eventName, String eventOrganiser, String eventFaculty, String eventCategory,
                  String eventParticipation, String eventLocation, Date eventDate, String eventStartTime, String eventEndTime) {
@@ -60,7 +61,9 @@ public class Event {
         this.eventOrganiser = eventOrganiser;
     }
 
-    public String getEventFaculty() {return eventFaculty; }
+    public String getEventFaculty() {
+        return eventFaculty;
+    }
 
     public void setEventFaculty(String eventFaculty) {
         this.eventFaculty = eventFaculty;
@@ -78,11 +81,17 @@ public class Event {
         return eventParticipation;
     }
 
-    public void setEventParticipation(String eventParticipation) { this.eventParticipation = eventParticipation; }
+    public void setEventParticipation(String eventParticipation) {
+        this.eventParticipation = eventParticipation;
+    }
 
-    public String getEventLocation() {return eventLocation;}
+    public String getEventLocation() {
+        return eventLocation;
+    }
 
-    public void setEventLocation(String eventLocation) { this.eventLocation = eventLocation; }
+    public void setEventLocation(String eventLocation) {
+        this.eventLocation = eventLocation;
+    }
 
     public Date getEventDate() {
         return eventDate;
@@ -131,6 +140,5 @@ public class Event {
     public void setEventComments(String EventComments) {
         this.eventComments = eventComments;
     }
-
-
 }
+

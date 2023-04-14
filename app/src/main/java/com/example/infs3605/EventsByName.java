@@ -2,57 +2,77 @@ package com.example.infs3605;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class EventsByName extends AppCompatActivity {
-    private DatabaseReference eventsRef;
+    private RecyclerView mRecyclerView;
+    private RecyclerViewAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<Event> mEventList;
+
     private DatabaseReference mDatabase;
-    private FirebaseRecyclerAdapter<Event, RecyclerViewAdapter.EventViewHolder> mAdapter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_events_by_name);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("events");
+        // Initialize Firebase database reference
+        mDatabase = FirebaseDatabase.getInstance().getReference("events");
 
-        // Set up the RecyclerView with the FirebaseRecyclerAdapter
-        RecyclerView recyclerView = findViewById(R.id.eventsRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Initialize the event list
+        mEventList = new ArrayList<>();
 
-        FirebaseRecyclerOptions<Event> options = new FirebaseRecyclerOptions.Builder<Event>()
-                .setQuery(mDatabase, Event.class)
-                .build();
+        // Set up the recycler view
+        mRecyclerView = findViewById(R.id.eventsRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new FirebaseRecyclerAdapter<Event, RecyclerViewAdapter.EventViewHolder>(options) {
+        // Set up the adapter
+        mAdapter = new RecyclerViewAdapter(mEventList);
+        mRecyclerView.setAdapter(mAdapter);
+
+        // Attach a listener to the Firebase database reference
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            protected void onBindViewHolder(@NonNull RecyclerViewAdapter.EventViewHolder holder, int position, @NonNull Event model) {
-                holder.bind(model);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mEventList.clear();
+                for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
+                    Event event = eventSnapshot.getValue(Event.class);
+                    mEventList.add(event);
+                }
+                Collections.sort(mEventList, new Comparator<Event>() {
+                    @Override
+                    public int compare(Event event1, Event event2) {
+                        return event1.getEventName().compareToIgnoreCase(event2.getEventName());
+                    }
+                });
+                mAdapter.notifyDataSetChanged();
             }
-
-            @NonNull
+            String TAG;
             @Override
-            public RecyclerViewAdapter.EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false);
-                return new RecyclerViewAdapter.EventViewHolder(view);
-            }
-        };
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        recyclerView.setAdapter(mAdapter);
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
     }
-
 
     public void launchEventsDetail() {
         Intent intent = new Intent(this, EventsDetail.class);

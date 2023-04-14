@@ -2,14 +2,9 @@ package com.example.infs3605;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,12 +14,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class EventsByOrganiser extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private RecyclerViewAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private EventOrganiserAdapter mAdapter;
 
     private static final String TAG = "EventsByOrganiser";
 
@@ -39,15 +34,19 @@ public class EventsByOrganiser extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Event> eventList = new ArrayList<>();
                 eventOrganiserList.clear(); // clear the list before adding new items
                 for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
                     Event event = eventSnapshot.getValue(Event.class);
+                    eventList.add(event);
                     String organiser = event.getEventOrganiser();
                     if (!eventOrganiserList.contains(organiser)) { // add only if not already in the list
                         eventOrganiserList.add(organiser);
                     }
                 }
-                mAdapter.notifyDataSetChanged();
+                Collections.sort(eventOrganiserList); // sort alphabetically
+                mAdapter = new EventOrganiserAdapter(eventList);
+                mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
             }
 
             @Override
@@ -56,12 +55,5 @@ public class EventsByOrganiser extends AppCompatActivity {
             }
         });
 
-        mRecyclerView = findViewById(R.id.eventsOrganiserRecyclerView);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new RecyclerViewAdapter(eventOrganiserList);
-        mRecyclerView.setAdapter(mAdapter);
     }
 }
-
