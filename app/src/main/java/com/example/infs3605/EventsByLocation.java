@@ -49,7 +49,7 @@ public class EventsByLocation extends AppCompatActivity {
                     }
                 }
                 Collections.sort(locationList); // sort alphabetically
-                mAdapter = new LocationAdapter(locationList);
+                mAdapter = new LocationAdapter(locationList, ref);
                 mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
             }
 

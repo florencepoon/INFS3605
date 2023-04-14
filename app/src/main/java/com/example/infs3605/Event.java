@@ -1,8 +1,11 @@
 package com.example.infs3605;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class Event {
+public class Event implements Parcelable {
     //attributes
     private Integer eventID;
     private String eventName;
@@ -35,6 +38,37 @@ public class Event {
         this.eventStartTime = eventStartTime;
         this.eventEndTime = eventEndTime;
     }
+
+    protected Event(Parcel in) {
+        if (in.readByte() == 0) {
+            eventID = null;
+        } else {
+            eventID = in.readInt();
+        }
+        eventName = in.readString();
+        eventOrganiser = in.readString();
+        eventFaculty = in.readString();
+        eventCategory = in.readString();
+        eventParticipation = in.readString();
+        eventLocation = in.readString();
+        eventStartTime = in.readString();
+        eventEndTime = in.readString();
+        eventAttachments = in.readString();
+        eventLinks = in.readString();
+        eventComments = in.readString();
+    }
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 
     // Getters and setters
     public int getEventID() {
@@ -139,6 +173,32 @@ public class Event {
 
     public void setEventComments(String EventComments) {
         this.eventComments = eventComments;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (eventID == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(eventID);
+        }
+        dest.writeString(eventName);
+        dest.writeString(eventOrganiser);
+        dest.writeString(eventFaculty);
+        dest.writeString(eventCategory);
+        dest.writeString(eventParticipation);
+        dest.writeString(eventLocation);
+        dest.writeString(eventStartTime);
+        dest.writeString(eventEndTime);
+        dest.writeString(eventAttachments);
+        dest.writeString(eventLinks);
+        dest.writeString(eventComments);
     }
 }
 

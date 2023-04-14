@@ -25,7 +25,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     private List<String> mLocationList;
     private DatabaseReference mDatabase;
 
-    public LocationAdapter(List<String> locationList, DatabaseReference database) {
+    public LocationAdapter(ArrayList<String> locationList, DatabaseReference database) {
         mLocationList = locationList;
         mDatabase = database;
         Collections.sort(mLocationList); // sort alphabetically
@@ -81,7 +81,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
         public ViewHolder(View view) {
             super(view);
-            mLocationTextView = view.findViewById(R.id.location_text);
+            mLocationTextView = view.findViewById(R.id.eventItemLocation);
         }
     }
 }
