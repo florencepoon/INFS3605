@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class FilteredLocation extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private EventAdapter mAdapter;
+    private FilteredLocationAdapter mAdapter;
     private TextView mLocationTextView;
 
     private static final String TAG = "EventListActivity";
@@ -28,11 +28,11 @@ public class FilteredLocation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_list);
+        setContentView(R.layout.recycler_view_item_location);
 
         String location = getIntent().getStringExtra("location");
 
-        mLocationTextView = findViewById(R.id.locationTextView);
+        mLocationTextView = findViewById(R.id.eventItemLocation);
         mLocationTextView.setText(location);
 
         ArrayList<Event> eventList = new ArrayList<>();
@@ -47,7 +47,7 @@ public class FilteredLocation extends AppCompatActivity {
                     Event event = eventSnapshot.getValue(Event.class);
                     eventList.add(event);
                 }
-                mAdapter = new EventAdapter(eventList);
+                mAdapter = new FilteredLocationAdapter(eventList);
                 mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
             }
 
