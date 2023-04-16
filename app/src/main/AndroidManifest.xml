@@ -28,6 +28,9 @@
             android:name=".EventsByOrganiser"
             android:exported="true" />
         <activity
+            android:name=".EventsDetail"
+            android:exported="true" />
+        <activity
             android:name=".LandingPage"
             android:exported="true">
             <intent-filter>

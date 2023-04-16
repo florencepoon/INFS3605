@@ -69,7 +69,6 @@ public class EventsDetail extends Fragment {
             @Override
             public void onClick(View v) {
                 TextView eventName = view.findViewById(R.id.eventsNameDetail);
-
                 Query query = eventsRef.orderByChild("eventName").equalTo(eventName.toString());
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

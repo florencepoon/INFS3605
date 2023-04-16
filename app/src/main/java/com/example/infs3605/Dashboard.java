@@ -59,7 +59,6 @@ public class Dashboard extends Fragment {
     private List<Event> eventData;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
-
     TextView dashboardGreeting;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -75,10 +74,21 @@ public class Dashboard extends Fragment {
 
         //Initiate a linear recyclerview layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        dashboardAdapter.RecyclerViewListener listener = new dashboardAdapter.RecyclerViewListener() {
+            @Override
+            public void onClick(View view, String eventID1) {
+                //need to base it off a fragment
+                Intent i = new Intent(getActivity(), EventsDetail.class);
+                i.putExtra("message", eventID1);
+                startActivity(i);
+            }
+        };
 
         //Initiate adapter and pass on list of events
         adapter = new dashboardAdapter(new ArrayList<Event>(), listener);
         recyclerView.setAdapter(adapter);
+
+        //Setting click listener for Event Recyclerview
 
         //Returning the list of events stored in Firebase
         myRef = FirebaseDatabase.getInstance().getReference().child("Events");
@@ -94,6 +104,7 @@ public class Dashboard extends Fragment {
 
                 //Implementing admin check to filter out events
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
                     if (snapshot.child("eventName").getValue() != null) {
                         eventName = snapshot.child("eventName").getValue(String.class);
                     }
@@ -107,8 +118,9 @@ public class Dashboard extends Fragment {
                         Long eventTime = snapshot.child("eventDate").child("time").getValue(Long.class);
                         eventDate = new Date(eventTime);
                     }
-
                     Event event = new Event();
+                    event.setEventID1(myRef.getKey());
+                    event.setCreatorID(FirebaseAuth.getInstance().getCurrentUser().getUid());
                     event.setEventName(eventName);
                     event.setEventLocation(eventLocation);
                     event.setEventCategory(eventCategory);
@@ -119,13 +131,22 @@ public class Dashboard extends Fragment {
                 // Filter events by dates that fall within the upcoming week
                 long currentTime = Calendar.getInstance().getTimeInMillis();
                 long upcomingWeekTime = currentTime + TimeUnit.DAYS.toMillis(7);
-                List<Event> upcomingEvents = new ArrayList<>();
-                for (Event event: events) {
-                    if (event.getEventDate().getTime() >= currentTime && event.getEventDate().getTime() <= upcomingWeekTime) {
-                        upcomingEvents.add(event);
+                for (Event event : events) {
+                    //Checking if the user is an admin or not
+                    if (mAuth.getCurrentUser().getUid().equals("koGVEACbIRZ8JRLmzGGKgvfhWjs1")) {
+                        if (event.getEventDate().getTime() >= currentTime && event.getEventDate().getTime() <= upcomingWeekTime) {
+                            List<Event> upcomingEvents = new ArrayList<>();
+                            upcomingEvents.add(event);
+                            adapter.setData((ArrayList<Event>) upcomingEvents);
+                        }
+                    } else {
+                        if (event.getCreatorID().equals(mAuth.getCurrentUser().getUid()) && event.getEventDate().getTime() >= currentTime && event.getEventDate().getTime() <= upcomingWeekTime) {
+                            List<Event> upcomingEvents = new ArrayList<>();
+                            upcomingEvents.add(event);
+                            adapter.setData((ArrayList<Event>) upcomingEvents);
+                        }
                     }
                 }
-                adapter.setData((ArrayList<Event>) upcomingEvents);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -139,7 +160,4 @@ public class Dashboard extends Fragment {
 
         return v;
     }
-
-
-
 }

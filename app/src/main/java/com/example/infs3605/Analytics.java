@@ -32,6 +32,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,6 +75,8 @@ public class Analytics extends Fragment {
         //method for counting the number of completed events
         // Get a reference to the Firebase database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String currentUserId = currentUser.getUid();
 
         // Get a reference to the "events" node in the database
         myRef = FirebaseDatabase.getInstance().getReference().child("Events");
@@ -90,14 +93,18 @@ public class Analytics extends Fragment {
                 // Iterate over all events in the snapshot
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     // Get the event date from the snapshot
-                    Long eventDateTime = eventSnapshot.child("eventDate").child("time").getValue(Long.class);
+                    String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
+                    if (creatorId != null && creatorId.equals(currentUserId)) {
 
-                    // Compare the event date with today's date
-                    if (eventDateTime != null) {
-                        Date eventDate = new Date(eventDateTime);
-                        if (eventDate.before(today)) {
-                            // Increment the completed events counter
-                            completedEvents++;
+                        Long eventDateTime = eventSnapshot.child("eventDate").child("time").getValue(Long.class);
+
+                        // Compare the event date with today's date
+                        if (eventDateTime != null) {
+                            Date eventDate = new Date(eventDateTime);
+                            if (eventDate.before(today)) {
+                                // Increment the completed events counter
+                                completedEvents++;
+                            }
                         }
                     }
                 }
@@ -134,30 +141,33 @@ public class Analytics extends Fragment {
                 // Iterate over all events in the snapshot
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     // Get the event date from the snapshot
-                    Long eventTime = eventSnapshot.child("eventDate").child("time").getValue(Long.class);
+                    String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
+                    if (creatorId != null && creatorId.equals(currentUserId)) {
+                        // Get the event date from the snapshot
+                        Long eventTime = eventSnapshot.child("eventDate").child("time").getValue(Long.class);
 
-                    if (eventTime != null) {
-                        Date eventDate = new Date(eventTime);
-                        // Compare the event date with today's date
-                        if (eventDate != null && eventDate.after(today)) {
-                            // Check if the event is within the next week
-                            if (eventDate.before(nextWeek)) {
-                                // Increment the upcoming events within the next week counter
-                                upcomingEventsWeek++;
-                            }
+                        if (eventTime != null) {
+                            Date eventDate = new Date(eventTime);
+                            // Compare the event date with today's date
+                            if (eventDate != null && eventDate.after(today)) {
+                                // Check if the event is within the next week
+                                if (eventDate.before(nextWeek)) {
+                                    // Increment the upcoming events within the next week counter
+                                    upcomingEventsWeek++;
+                                }
 
-                            // Check if the event is within the next year
-                            Calendar eventCalendar = Calendar.getInstance();
-                            eventCalendar.setTime(eventDate);
-                            int eventYear = eventCalendar.get(Calendar.YEAR);
-                            int currentYear = calendar.get(Calendar.YEAR);
-                            if (eventYear == currentYear) {
-                                // Increment the upcoming events within the current year counter
-                                upcomingEventsYear++;
+                                // Check if the event is within the next year
+                                Calendar eventCalendar = Calendar.getInstance();
+                                eventCalendar.setTime(eventDate);
+                                int eventYear = eventCalendar.get(Calendar.YEAR);
+                                int currentYear = calendar.get(Calendar.YEAR);
+                                if (eventYear == currentYear) {
+                                    // Increment the upcoming events within the current year counter
+                                    upcomingEventsYear++;
+                                }
                             }
                         }
                     }
-
                 }
                 //Displaying final counts after all events have been counted
                 eventsThisWeek.setText(String.valueOf(upcomingEventsWeek));
@@ -183,15 +193,18 @@ public class Analytics extends Fragment {
                 // Iterate through all events and count the number of events for each event type
                 int totalEvents = 0;
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
-                    String eventType = eventSnapshot.child("eventCategory").getValue(String.class);
-                    if (eventData.containsKey(eventType)) {
-                        eventData.put(eventType, eventData.get(eventType) + 1);
-                    } else {
-                        eventData.put(eventType, 1);
+                    // Get the event date from the snapshot
+                    String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
+                    if (creatorId != null && creatorId.equals(currentUserId)) {
+                        String eventType = eventSnapshot.child("eventCategory").getValue(String.class);
+                        if (eventData.containsKey(eventType)) {
+                            eventData.put(eventType, eventData.get(eventType) + 1);
+                        } else {
+                            eventData.put(eventType, 1);
+                        }
                     }
                     totalEvents++;
                 }
-
 
                 // Convert the event data to a List<Entry> for use in MPCharts
                 List<Entry> entries = new ArrayList<>();
@@ -248,8 +261,12 @@ public class Analytics extends Fragment {
 
                 // Count the number of events in each location
                 for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
-                    String eventOrganiser = eventSnapshot.child("eventOrganiser").getValue(String.class);
-                    eventTypeCount.put(eventOrganiser, eventTypeCount.getOrDefault(eventOrganiser, 0) + 1);
+                    // Get the event date from the snapshot
+                    String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
+                    if (creatorId != null && creatorId.equals(currentUserId)) {
+                        String eventOrganiser = eventSnapshot.child("eventOrganiser").getValue(String.class);
+                        eventTypeCount.put(eventOrganiser, eventTypeCount.getOrDefault(eventOrganiser, 0) + 1);
+                    }
                 }
 
                 // Sort the event locations by count in descending order
@@ -294,16 +311,20 @@ public class Analytics extends Fragment {
 
                 // Loop through the event data
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
-                    // Retrieve the faculty data for the event
-                    String faculty = eventSnapshot.child("eventFaculty").getValue(String.class);
+                    // Get the event date from the snapshot
+                    String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
+                    if (creatorId != null && creatorId.equals(currentUserId)) {
+                        // Retrieve the faculty data for the event
+                        String faculty = eventSnapshot.child("eventFaculty").getValue(String.class);
 
-                    // Update the count for the faculty
-                    if (faculty != null) {
-                        Integer count = facultyCounts.get(faculty);
-                        if (count == null) {
-                            count = 0;
+                        // Update the count for the faculty
+                        if (faculty != null) {
+                            Integer count = facultyCounts.get(faculty);
+                            if (count == null) {
+                                count = 0;
+                            }
+                            facultyCounts.put(faculty, count + 1);
                         }
-                        facultyCounts.put(faculty, count + 1);
                     }
                 }
 
@@ -392,14 +413,18 @@ public class Analytics extends Fragment {
 
                 // loop through the event data
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
-                    String location = eventSnapshot.child("eventLocation").getValue(String.class);
+                    // Get the event date from the snapshot
+                    String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
+                    if (creatorId != null && creatorId.equals(currentUserId)) {
+                        String location = eventSnapshot.child("eventLocation").getValue(String.class);
 
-                    if (location != null) {
-                        Integer count = locationCounts.get(location);
-                        if (count == null) {
-                            count = 0;
+                        if (location != null) {
+                            Integer count = locationCounts.get(location);
+                            if (count == null) {
+                                count = 0;
+                            }
+                            locationCounts.put(location, count + 1);
                         }
-                        locationCounts.put(location, count + 1);
                     }
                 }
 

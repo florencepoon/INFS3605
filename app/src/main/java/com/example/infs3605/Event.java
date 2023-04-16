@@ -8,6 +8,10 @@ import java.util.Date;
 public class Event implements Parcelable {
     //attributes
     private Integer eventID;
+
+    private String eventID1;
+
+    private String creatorID;
     private String eventName;
     private String eventOrganiser;
     private String eventFaculty;
@@ -25,9 +29,10 @@ public class Event implements Parcelable {
     }
 
     // Constructor
-    public Event(Integer eventID, String eventName, String eventOrganiser, String eventFaculty, String eventCategory,
+    public Event(String creatorID, String eventName, String eventOrganiser, String eventFaculty, String eventCategory,
                  String eventParticipation, String eventLocation, Date eventDate, String eventStartTime, String eventEndTime) {
-        this.eventID = eventID;
+        this.creatorID = creatorID;
+        this.creatorID = creatorID;
         this.eventName = eventName;
         this.eventOrganiser = eventOrganiser;
         this.eventFaculty = eventFaculty;
@@ -79,6 +84,21 @@ public class Event implements Parcelable {
         this.eventID = eventID;
     }
 
+    public String getEventID1() {
+        return eventID1;
+    }
+
+    public void setEventID1(String eventID1) {
+        this.eventID1 = eventID1;
+    }
+
+    public String getCreatorID() {
+        return creatorID;
+    }
+
+    public void setCreatorID(String creatorID) {
+        this.creatorID = creatorID;
+    }
     public String getEventName() {
         return eventName;
     }

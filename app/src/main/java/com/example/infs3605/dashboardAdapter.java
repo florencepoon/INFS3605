@@ -14,29 +14,11 @@ import java.util.Locale;
 
 public class dashboardAdapter extends RecyclerView.Adapter<dashboardAdapter.MyViewHolder>  {
     private ArrayList<Event> mEvents;
-    private RecyclerView.RecyclerListener mListener;
+    private RecyclerViewListener mListener;
 
-    //Creating listener
-    public dashboardAdapter(ArrayList<Event> events, RecyclerView.RecyclerListener listener) {
+    public dashboardAdapter(ArrayList<Event> events, RecyclerViewListener listener) {
         mEvents = events;
         mListener = listener;
-    }
-    //Mapping event data to recyclerview
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mName, mCategory, mLocation, mDate;
-        public RecyclerView.RecyclerListener mListener;
-        public MyViewHolder(@NonNull View itemView, RecyclerView.RecyclerListener listener) {
-            super(itemView);
-            mListener = listener;
-            mName = itemView.findViewById(R.id.eventName);
-            mCategory = itemView.findViewById(R.id.eventCategory);
-            mLocation = itemView.findViewById(R.id.eventLocation);
-            mDate = itemView.findViewById(R.id.eventDate);
-        }
-
-        @Override
-        public void onClick(View view) {
-        }
     }
 
     //Linking the xml layout file as the RecyclerView item
@@ -46,6 +28,7 @@ public class dashboardAdapter extends RecyclerView.Adapter<dashboardAdapter.MyVi
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false);
         return new MyViewHolder(view, mListener);
     }
+
     //Mapping event attributes to the recycler view list
     @Override
     public void onBindViewHolder(@NonNull dashboardAdapter.MyViewHolder holder, int position) {
@@ -53,11 +36,36 @@ public class dashboardAdapter extends RecyclerView.Adapter<dashboardAdapter.MyVi
         holder.mName.setText(event.getEventName());
         holder.mCategory.setText(event.getEventCategory());
         holder.mLocation.setText(event.getEventLocation());
+        holder.itemView.setTag(event.getEventID1());
 
         // Format date using SimpleDateFormat
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String formattedDate = sdf.format(event.getEventDate());
         holder.mDate.setText(formattedDate);
+    }
+
+    //Mapping event data to recyclerview
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private TextView mName, mCategory, mLocation, mDate;
+        public RecyclerViewListener mListener;
+        public MyViewHolder(@NonNull View itemView, RecyclerViewListener listener) {
+            super(itemView);
+            mListener = listener;
+            mName = itemView.findViewById(R.id.eventName);
+            mCategory = itemView.findViewById(R.id.eventCategory);
+            mLocation = itemView.findViewById(R.id.eventLocation);
+            mDate = itemView.findViewById(R.id.eventDate);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+        mListener.onClick(view, (String) view.getTag());
+        }
+    }
+
+    public interface RecyclerViewListener {
+        void onClick(View view, String eventID1);
     }
 
     @Override

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -74,10 +75,11 @@ public class AddNewEvent extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
 
-            Event event = new Event(11, eventNameText.getText().toString(), eventOrganiserText.getText().toString(), eventFacultyText.getText().toString(), eventCategorySpinner.getSelectedItem().toString(),
+            String creatorID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            Event event = new Event(creatorID, eventNameText.getText().toString(), eventOrganiserText.getText().toString(), eventFacultyText.getText().toString(), eventCategorySpinner.getSelectedItem().toString(),
                 eventParticipationSpinner.getSelectedItem().toString(), eventLocationText.getText().toString(), date, eventStartTimeText.getText().toString(),
                 eventEndTimeText.getText().toString());
-        mDatabase.child("Events").child(String.valueOf(event.getEventID())).setValue(event);
+        mDatabase.child("Events").push().setValue(event);
         }
 
 }
