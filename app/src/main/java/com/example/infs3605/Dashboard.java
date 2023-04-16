@@ -67,9 +67,10 @@ public class Dashboard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //Setting view to dashboard fragment
         View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        //create handle for RecyclerView
+        //Create handle for RecyclerView
         recyclerView = v.findViewById(R.id.recycler_view);
 
         //Initiate a linear recyclerview layout manager
@@ -79,6 +80,7 @@ public class Dashboard extends Fragment {
         adapter = new dashboardAdapter(new ArrayList<Event>(), listener);
         recyclerView.setAdapter(adapter);
 
+        //Returning the list of events stored in Firebase
         myRef = FirebaseDatabase.getInstance().getReference().child("Events");
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -89,6 +91,8 @@ public class Dashboard extends Fragment {
                 String eventLocation = null;
                 String eventCategory = null;
                 Date eventDate = null;
+
+                //Implementing admin check to filter out events
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (snapshot.child("eventName").getValue() != null) {
                         eventName = snapshot.child("eventName").getValue(String.class);
@@ -133,14 +137,6 @@ public class Dashboard extends Fragment {
         TextView name = v.findViewById(R.id.dashboardGreeting);
         name.setText("Welcome back, " + displayName + "!");
 
-        addEventButton = v.findViewById(R.id.AddEventButton);
-        addEventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddNewEvent.class);
-                startActivity(intent);
-            }
-        });
         return v;
     }
 
