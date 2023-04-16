@@ -28,6 +28,12 @@
             android:name=".EventsByOrganiser"
             android:exported="true" />
         <activity
+            android:name=".EventsByLocation"
+            android:exported="true" />
+        <activity
+            android:name=".EventsByType"
+            android:exported="true" />
+        <activity
             android:name=".EventsDetail"
             android:exported="true" />
         <activity

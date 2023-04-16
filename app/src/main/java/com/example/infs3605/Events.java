@@ -36,7 +36,7 @@ public class Events extends Fragment {
         });
 
         //by Name Button
-        byOrganiser.setOnClickListener(new View.OnClickListener() {
+        byName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EventsByName.class);
@@ -53,6 +53,25 @@ public class Events extends Fragment {
             }
         });
 
+        //by Type Button
+        byType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EventsByType.class);
+                startActivity(intent);
+            }
+        });
+
+        //by Location Button
+        byLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EventsByLocation.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
+
 }
