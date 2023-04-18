@@ -33,7 +33,7 @@ public class EventsByName extends AppCompatActivity {
         setContentView(R.layout.fragment_events_by_name);
 
         // Initialize Firebase database reference
-        mDatabase = FirebaseDatabase.getInstance().getReference("events");
+        mDatabase = FirebaseDatabase.getInstance().getReference("Events");
 
         // Initialize the event list
         mEventList = new ArrayList<>();

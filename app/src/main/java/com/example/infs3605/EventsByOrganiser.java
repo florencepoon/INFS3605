@@ -29,7 +29,7 @@ public class EventsByOrganiser extends AppCompatActivity {
         setContentView(R.layout.fragment_events_by_organiser);
 
         ArrayList<String> eventOrganiserList = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("events");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
         mRecyclerView = findViewById(R.id.eventsOrganiserRecyclerView); // replace `recyclerView` with the ID of your RecyclerView in your XML layout file
 
 
