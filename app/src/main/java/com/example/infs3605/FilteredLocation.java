@@ -36,7 +36,7 @@ public class FilteredLocation extends AppCompatActivity {
         mLocationTextView.setText(location);
 
         ArrayList<Event> eventList = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("events");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
 
         Query query = ref.orderByChild("eventLocation").equalTo(location);
         query.addValueEventListener(new ValueEventListener() {

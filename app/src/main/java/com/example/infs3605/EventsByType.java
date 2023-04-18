@@ -31,7 +31,7 @@ public class EventsByType extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ArrayList<String> eventTypeList = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("events");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override

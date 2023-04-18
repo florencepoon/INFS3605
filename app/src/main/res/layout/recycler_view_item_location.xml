@@ -19,6 +19,7 @@
         app:srcCompat="@drawable/eventsbanner" />
 
     <TextView
+        android:id="@+id/eventItemLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="172dp"
