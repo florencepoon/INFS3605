@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/eventsNameDetail"
         android:layout_width="245dp"
         android:layout_height="22dp"
@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
-    <TextView
+    <EditText
         android:id="@+id/textView14"
         android:layout_width="185dp"
         android:layout_height="35dp"
@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <EditText
         android:id="@+id/editEventButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eventsNameDetail" />
 
-    <TextView
+    <EditText
         android:id="@+id/eventsCategoryDetail"
         android:layout_width="124dp"
         android:layout_height="23dp"
@@ -113,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
-    <TextView
+    <EditText
         android:id="@+id/eventsFacultyDetail"
         android:layout_width="124dp"
         android:layout_height="23dp"
@@ -129,7 +129,7 @@
         app:layout_constraintTop_toBottomOf="@+id/eventsParticipationDetail"
         tools:text="Event Faculty" />
 
-    <TextView
+    <EditText
         android:id="@+id/eventsParticipationDetail"
         android:layout_width="124dp"
         android:layout_height="23dp"
@@ -165,7 +165,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
-    <TextView
+    <EditText
         android:id="@+id/EventsOrganiserDetail"
         android:layout_width="190dp"
         android:layout_height="25dp"
@@ -192,8 +192,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
-    <TextView
-        android:id="@+id/eventsDateTimeDetail"
+    <EditText
+        android:id="@+id/eventsDateDetail"
         android:layout_width="190dp"
         android:layout_height="25dp"
         android:layout_marginStart="4dp"
@@ -205,7 +205,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView9"
         app:layout_constraintTop_toBottomOf="@+id/EventsOrganiserDetail" />
 
-    <TextView
+    <EditText
         android:id="@+id/eventsLocationDetail"
         android:layout_width="190dp"
         android:layout_height="25dp"
@@ -216,10 +216,10 @@
         android:textColor="#000000"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/imageView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+        app:layout_constraintTop_toBottomOf="@+id/eventsTimeDetail" />
 
-    <TextView
-        android:id="@+id/textView23"
+    <EditText
+        android:id="@+id/eventsTimeDetail"
         android:layout_width="190dp"
         android:layout_height="25dp"
         android:layout_marginStart="4dp"
@@ -229,7 +229,7 @@
         android:textColor="#000000"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/eventsDateTimeDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/eventsDateDetail" />
 
     <ImageView
         android:id="@+id/imageView10"
