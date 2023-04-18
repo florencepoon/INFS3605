@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends Fragment {
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +54,15 @@ public class Profile extends Fragment {
                 getActivity().finish();
             }
         });
+
+        TextView accessLevel = view.findViewById(R.id.AccessLevel);
+
+        //Determining access level
+        if (mAuth.getCurrentUser().getUid().equals("koGVEACbIRZ8JRLmzGGKgvfhWjs1")) {
+            accessLevel.setText("Admin");
+        } else {
+            accessLevel.setText("Staff");
+        }
 
         //Back to dashboard button
         ImageView backButton = view.findViewById(R.id.leftArrowProfile);

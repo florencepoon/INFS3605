@@ -61,6 +61,7 @@ public class dashboardAdapter extends RecyclerView.Adapter<dashboardAdapter.MyVi
         @Override
         public void onClick(View view) {
         mListener.onClick(view, (String) view.getTag());
+            String eventID = (String) view.getTag();
         }
     }
 

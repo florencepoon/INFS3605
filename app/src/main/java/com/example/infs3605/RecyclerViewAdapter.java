@@ -34,8 +34,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.mEventNameTextView.setText(event.getEventName());
         holder.mEventLocationTextView.setText(event.getEventLocation());
         holder.mEventCategoryTextView.setText(event.getEventCategory());
-        holder.mEventDateTextView.setText(getEventDate());
-
+        holder.mEventDateTextView.setText(event.getEventDate().toString());
     }
 
     @Override

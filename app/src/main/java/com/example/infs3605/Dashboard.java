@@ -77,7 +77,6 @@ public class Dashboard extends Fragment {
         dashboardAdapter.RecyclerViewListener listener = new dashboardAdapter.RecyclerViewListener() {
             @Override
             public void onClick(View view, String eventID1) {
-                //need to base it off a fragment
                 Intent i = new Intent(getActivity(), EventsDetail.class);
                 i.putExtra("message", eventID1);
                 startActivity(i);
@@ -119,7 +118,7 @@ public class Dashboard extends Fragment {
                         eventDate = new Date(eventTime);
                     }
                     Event event = new Event();
-                    event.setEventID1(myRef.getKey());
+                    event.setEventID1(snapshot.getKey());
                     event.setCreatorID(FirebaseAuth.getInstance().getCurrentUser().getUid());
                     event.setEventName(eventName);
                     event.setEventLocation(eventLocation);
@@ -131,21 +130,21 @@ public class Dashboard extends Fragment {
                 // Filter events by dates that fall within the upcoming week
                 long currentTime = Calendar.getInstance().getTimeInMillis();
                 long upcomingWeekTime = currentTime + TimeUnit.DAYS.toMillis(7);
+                List<Event> upcomingEvents = new ArrayList<>();
                 for (Event event : events) {
                     //Checking if the user is an admin or not
                     if (mAuth.getCurrentUser().getUid().equals("koGVEACbIRZ8JRLmzGGKgvfhWjs1")) {
                         if (event.getEventDate().getTime() >= currentTime && event.getEventDate().getTime() <= upcomingWeekTime) {
-                            List<Event> upcomingEvents = new ArrayList<>();
                             upcomingEvents.add(event);
-                            adapter.setData((ArrayList<Event>) upcomingEvents);
                         }
                     } else {
                         if (event.getCreatorID().equals(mAuth.getCurrentUser().getUid()) && event.getEventDate().getTime() >= currentTime && event.getEventDate().getTime() <= upcomingWeekTime) {
-                            List<Event> upcomingEvents = new ArrayList<>();
                             upcomingEvents.add(event);
-                            adapter.setData((ArrayList<Event>) upcomingEvents);
+                        } else {
+                            continue;
                         }
                     }
+                    adapter.setData((ArrayList<Event>) upcomingEvents);
                 }
             }
             @Override

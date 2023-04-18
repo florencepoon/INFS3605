@@ -94,7 +94,7 @@ public class Analytics extends Fragment {
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     // Get the event date from the snapshot
                     String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
-                    if (creatorId != null && creatorId.equals(currentUserId)) {
+                    if (creatorId != null) {
 
                         Long eventDateTime = eventSnapshot.child("eventDate").child("time").getValue(Long.class);
 
@@ -142,7 +142,7 @@ public class Analytics extends Fragment {
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     // Get the event date from the snapshot
                     String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
-                    if (creatorId != null && creatorId.equals(currentUserId)) {
+                    if (creatorId != null) {
                         // Get the event date from the snapshot
                         Long eventTime = eventSnapshot.child("eventDate").child("time").getValue(Long.class);
 
@@ -195,7 +195,7 @@ public class Analytics extends Fragment {
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     // Get the event date from the snapshot
                     String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
-                    if (creatorId != null && creatorId.equals(currentUserId)) {
+                    if (creatorId != null) {
                         String eventType = eventSnapshot.child("eventCategory").getValue(String.class);
                         if (eventData.containsKey(eventType)) {
                             eventData.put(eventType, eventData.get(eventType) + 1);
@@ -211,8 +211,21 @@ public class Analytics extends Fragment {
                 for (Map.Entry<String, Integer> entry : eventData.entrySet()) {
                     String eventType = entry.getKey();
                     Integer eventCount = entry.getValue();
-                    totalEvents += eventCount;
-                    entries.add(new Entry(0, eventCount.floatValue(), eventType));
+                    float percentage = (float) eventCount/totalEvents * 100;
+                    entries.add(new Entry(0, percentage, eventType));
+                }
+
+// Define your custom color scheme
+                int[] colors = {Color.parseColor("#303b55"),Color.parseColor("#a5b0c3"), Color.parseColor("#a0a1a5"), Color.parseColor("#6f7683"), Color.parseColor("#8491ad")};
+
+// Create a list to hold the dynamically generated colors
+                List<Integer> dynamicColors = new ArrayList<>();
+
+// Loop through the data entries and generate colors dynamically
+                for (int i = 0; i < entries.size(); i++) {
+                    int colorIndex = i % colors.length; // Get the index of the current color
+                    int color = colors[colorIndex]; // Get the color at the current index
+                    dynamicColors.add(color); // Add the color to the dynamic color list
                 }
 
                 // Create a pie chart using MPCharts
@@ -222,12 +235,19 @@ public class Analytics extends Fragment {
                 description.setText("");
                 pieChart.setDescription(description);
                 PieDataSet dataSet = new PieDataSet(convertEntriesToPieEntries(entries), "Events");
-                dataSet.setValueTextSize(12f);
-                dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-                dataSet.setValueLineColor(Color.BLACK);
-                dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+                dataSet.setValueTextSize(14f);
+                // Set the dynamic colors on the dataset
+                dataSet.setColors(dynamicColors);
+                dataSet.setYValuePosition(PieDataSet.ValuePosition.INSIDE_SLICE);
+                dataSet.setValueTextColor(Color.WHITE);
+                dataSet.setDrawValues(true);
+                dataSet.setValueFormatter (new ValueFormatter() {
+                  @Override
+                    public String getFormattedValue(float value) {
+                      return String.format("%.2f",value) + " %";
+                  }
+                });
                 PieData data = new PieData(dataSet);
-                data.setValueFormatter(new PercentFormatter());
                 pieChart.setData(data);
                 pieChart.animateXY(1000, 1000);
                 pieChart.invalidate();
@@ -313,7 +333,8 @@ public class Analytics extends Fragment {
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     // Get the event date from the snapshot
                     String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
-                    if (creatorId != null && creatorId.equals(currentUserId)) {
+                    // && creatorId.equals(currentUserId)
+                    if (creatorId != null) {
                         // Retrieve the faculty data for the event
                         String faculty = eventSnapshot.child("eventFaculty").getValue(String.class);
 
@@ -341,14 +362,27 @@ public class Analytics extends Fragment {
                 // Create a BarDataSet with the faculty counts data and a label
                 BarDataSet dataSet = new BarDataSet(facultyCountsData, "Faculty Counts");
 
-                // Set the color for the bars
-                dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-
                 // Set labels for each bar in the chart
                 ArrayList<String> labels = new ArrayList<>();
                 for (int j = 0; j < facultyCounts.size(); j++) {
                     labels.add((String) facultyCounts.keySet().toArray()[j]);
                 }
+
+                // Define your custom color scheme
+                int[] colors = {Color.parseColor("#303b55"),Color.parseColor("#a5b0c3"), Color.parseColor("#a0a1a5"), Color.parseColor("#6f7683"), Color.parseColor("#8491ad")};
+
+// Create a list to hold the dynamically generated colors
+                List<Integer> dynamicColors = new ArrayList<>();
+
+// Loop through the data entries and generate colors dynamically
+                for (int k = 0; k < facultyCountsData.size(); k++) {
+                    int colorIndex = k % colors.length; // Get the index of the current color
+                    int color = colors[colorIndex]; // Get the color at the current index
+                    dynamicColors.add(color); // Add the color to the dynamic color list
+                }
+
+// Set the custom colors to the BarDataSet
+                dataSet.setColors(dynamicColors);
 
                 // Create a BarData object with the BarDataSet
                 BarData barData = new BarData(dataSet);
@@ -415,7 +449,8 @@ public class Analytics extends Fragment {
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     // Get the event date from the snapshot
                     String creatorId = eventSnapshot.child("creatorID").getValue(String.class);
-                    if (creatorId != null && creatorId.equals(currentUserId)) {
+//                    && creatorId.equals(currentUserId)
+                    if (creatorId != null) {
                         String location = eventSnapshot.child("eventLocation").getValue(String.class);
 
                         if (location != null) {
@@ -441,7 +476,21 @@ public class Analytics extends Fragment {
                 }
 
                 BarDataSet dataSet = new BarDataSet(entries, "Location Counts");
-                dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+                // Define your custom color scheme
+                int[] colors = {Color.parseColor("#303b55"),Color.parseColor("#a5b0c3"), Color.parseColor("#a0a1a5"), Color.parseColor("#6f7683"), Color.parseColor("#8491ad")};
+
+// Create a list to hold the dynamically generated colors
+                List<Integer> dynamicColors = new ArrayList<>();
+
+// Loop through the data entries and generate colors dynamically
+                for (int k = 0; k < entries.size(); k++) {
+                    int colorIndex = k % colors.length; // Get the index of the current color
+                    int color = colors[colorIndex]; // Get the color at the current index
+                    dynamicColors.add(color); // Add the color to the dynamic color list
+                }
+
+                dataSet.setColors(dynamicColors);
 
                 BarData data = new BarData(dataSet);
                 data.setValueTextSize(14f);
@@ -460,19 +509,12 @@ public class Analytics extends Fragment {
                 // Get the X and Y axis objects from the chart
                 XAxis xAxis = chart.getXAxis();
                 YAxis yAxis = chart.getAxisLeft();
+                YAxis leftAxis = chart.getAxisLeft();
                 YAxis rightAxis = chart.getAxisRight();
 
                 // Format the Y axis labels to show whole numbers
-                yAxis.setGranularity(1f);
-                yAxis.setValueFormatter(new ValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value) {
-                        // Round the value to the nearest whole number
-                        int roundedValue = Math.round(value);
-                        // Convert the rounded value to a string
-                        return String.valueOf(roundedValue);
-                    }
-                });
+                leftAxis.setGranularity(1f);
+                leftAxis.setAxisMinimum(0f);
 
                 // Disable the grid lines
                 xAxis.setDrawGridLines(false);

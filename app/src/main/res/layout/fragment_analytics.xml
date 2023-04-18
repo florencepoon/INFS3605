@@ -13,53 +13,48 @@
 
         <ImageView
             android:id="@+id/imageView12"
-            android:layout_width="377dp"
-            android:layout_height="454dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/faculty_bar_chart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.571"
+            android:layout_width="378dp"
+            android:layout_height="398dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="280dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/locationBarChart"
-            app:layout_constraintVertical_bias="0.343"
             app:srcCompat="@drawable/navyrec" />
 
         <TextView
             android:id="@+id/top_one_organiser_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/layoutborder"
             android:text="XX"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/top_one_organiser_name"
+            app:layout_constraintEnd_toEndOf="@+id/imageView12"
             app:layout_constraintTop_toTopOf="@+id/top_one_organiser_name" />
 
         <TextView
             android:id="@+id/top_three_organiser_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/layoutborder"
             android:text="XX"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/top_three_organiser_name"
-            app:layout_constraintStart_toStartOf="@+id/top_one_organiser_count"
+            app:layout_constraintEnd_toEndOf="@+id/imageView12"
             app:layout_constraintTop_toTopOf="@+id/top_three_organiser_name" />
 
         <TextView
             android:id="@+id/top_two_organiser_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/layoutborder"
             android:text="XX"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/top_one_organiser_name"
-            app:layout_constraintStart_toStartOf="@+id/top_one_organiser_count"
+            app:layout_constraintEnd_toEndOf="@+id/imageView12"
             app:layout_constraintTop_toTopOf="@+id/top_two_organiser_name2" />
 
         <TextView
@@ -126,15 +121,14 @@
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/faculty_bar_chart"
-            android:layout_width="380dp"
-            android:layout_height="460dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="5dp"
+            android:layout_width="373dp"
+            android:layout_height="373dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView24">
+            app:layout_constraintTop_toBottomOf="@+id/textView24"
+            app:layout_constraintVertical_bias="0.0">
 
         </com.github.mikephil.charting.charts.BarChart>
 
@@ -145,7 +139,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/inder"
-            android:text="Faculty Insights"
+            android:text="Faculty Breakdown"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -156,9 +150,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/inder"
-            android:text="Organiser Insights"
+            android:text="Top Event Organisers"
             android:textColor="#040404"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -171,7 +165,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/inder"
-            android:text="Location Insights"
+            android:text="Location Breakdown"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -240,6 +234,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:textSize="12sp"
                     android:text="events completed ytd"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
@@ -268,6 +263,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="events this week"
+                    android:textSize="12sp"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
 
@@ -295,6 +291,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="events upcoming to eoy"
+                    android:textSize="12sp"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
@@ -306,7 +303,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="18dp"
             android:fontFamily="@font/inder"
-            android:text="Event Type Insights"
+            android:text="Event Breakdown"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -315,7 +312,7 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/testChart"
             android:layout_width="373dp"
-            android:layout_height="473dp"
+            android:layout_height="373dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -324,8 +321,8 @@
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/locationBarChart"
-            android:layout_width="379dp"
-            android:layout_height="431dp"
+            android:layout_width="373dp"
+            android:layout_height="373dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
