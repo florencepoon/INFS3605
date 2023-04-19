@@ -1,5 +1,6 @@
 package com.example.infs3605;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infs3605.Event;
+import com.example.infs3605.R;
+
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private List<Event> mEventList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     public RecyclerViewAdapter(List<Event> eventList) {
         mEventList = eventList;
@@ -34,7 +50,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.mEventNameTextView.setText(event.getEventName());
         holder.mEventLocationTextView.setText(event.getEventLocation());
         holder.mEventCategoryTextView.setText(event.getEventCategory());
-        holder.mEventDateTextView.setText(event.getEventDate().toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String formattedDate = dateFormat.format(event.getEventDate());
+        holder.mEventDateTextView.setText(formattedDate);
     }
 
     @Override
@@ -42,7 +60,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mEventList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mEventNameTextView;
         public TextView mEventLocationTextView;
         public TextView mEventCategoryTextView;
@@ -55,6 +73,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mEventLocationTextView = view.findViewById(R.id.eventLocation);
             mEventCategoryTextView = view.findViewById(R.id.eventCategory);
             mEventDateTextView = view.findViewById(R.id.eventDate);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            Event clickedEvent = mEventList.get(position);
+                            Intent intent = new Intent(v.getContext(), EventsDetail.class);
+                            intent.putExtra("creatorID", clickedEvent.getCreatorID());
+                            v.getContext().startActivity(intent);
+                        }
+                    }
+                }
+
+            });
         }
     }
 
@@ -65,4 +98,3 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 }
-

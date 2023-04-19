@@ -16,10 +16,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class EventOrganiserAdapter extends RecyclerView.Adapter<EventOrganiserAdapter.ViewHolder> {
     private List<Event> mEventList;
@@ -38,7 +40,7 @@ public class EventOrganiserAdapter extends RecyclerView.Adapter<EventOrganiserAd
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view_item, parent, false);
+                .inflate(R.layout.recycler_view_item_organiser, parent, false);
         return new ViewHolder(view);
     }
 
@@ -49,7 +51,9 @@ public class EventOrganiserAdapter extends RecyclerView.Adapter<EventOrganiserAd
         holder.mEventNameTextView.setText(event.getEventName());
         holder.mEventLocationTextView.setText(event.getEventLocation());
         holder.mEventCategoryTextView.setText(event.getEventCategory());
-        holder.mEventDateTextView.setText((CharSequence) event.getEventDate());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String formattedDate = dateFormat.format(event.getEventDate());
+        holder.mEventDateTextView.setText(formattedDate);
     }
 
     @Override
@@ -66,11 +70,11 @@ public class EventOrganiserAdapter extends RecyclerView.Adapter<EventOrganiserAd
 
         public ViewHolder(View view) {
             super(view);
-            mOrganiserNameTextView = view.findViewById(R.id.editTextEventOrganiser);
-            mEventNameTextView = view.findViewById(R.id.eventName);
-            mEventLocationTextView = view.findViewById(R.id.eventLocation);
-            mEventCategoryTextView = view.findViewById(R.id.eventCategory);
-            mEventDateTextView = view.findViewById(R.id.eventDate);
+            mOrganiserNameTextView = view.findViewById(R.id.eventOrganiser);
+            mEventNameTextView = view.findViewById(R.id.eventNameOrganiser);
+            mEventLocationTextView = view.findViewById(R.id.eventLocationOrganiser);
+            mEventCategoryTextView = view.findViewById(R.id.eventCategoryOrganiser);
+            mEventDateTextView = view.findViewById(R.id.eventDateOrganiser);
         }
     }
 }

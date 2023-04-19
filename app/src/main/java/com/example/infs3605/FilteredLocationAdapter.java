@@ -8,7 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FilteredLocationAdapter extends RecyclerView.Adapter<FilteredLocationAdapter.EventViewHolder> {
 
@@ -34,7 +36,9 @@ public class FilteredLocationAdapter extends RecyclerView.Adapter<FilteredLocati
         holder.mNameTextView.setText(event.getEventName());
         holder.mCategoryTextView.setText(event.getEventCategory());
         holder.mLocationTextView.setText(event.getEventLocation());
-        holder.mDateTextView.setText((CharSequence) event.getEventDate());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String formattedDate = dateFormat.format(event.getEventDate());
+        holder.mDateTextView.setText(formattedDate);
     }
 
     @Override

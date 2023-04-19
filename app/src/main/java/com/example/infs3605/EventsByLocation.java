@@ -31,7 +31,7 @@ public class EventsByLocation extends AppCompatActivity {
         setContentView(R.layout.fragment_events_by_location);
 
         ArrayList<String> locationList = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("events");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override

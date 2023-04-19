@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -21,75 +20,56 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-public class EventsDetail extends AppCompatActivity {
+public class EventsDetail extends Fragment {
     private ValueEventListener eventListener;
     private TextView eventNameText, eventCategoryText, eventParticipationText, eventOrganiserText, eventLocationText, eventStartTimeText, eventDateText;
-    DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("Events");
-
+    private String eventId = getArguments().getString("eventId");
+    DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("Events").child(eventId);
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_events_detail, container, false);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_events_detail);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference eventsRef = database.getReference("events");
 
-        //Receiving intent from the dashboard (the eventID string)
-        Intent intent = getIntent();
-        String eventId = intent.getStringExtra("message");
+        eventNameText = view.findViewById(R.id.eventsNameDetail);
+        eventCategoryText = view.findViewById(R.id.eventsCategoryDetail);
+        eventParticipationText = view.findViewById(R.id.eventsParticipationDetail);
+        eventOrganiserText = view.findViewById(R.id.EventsOrganiserDetail);
+        eventLocationText = view.findViewById(R.id.eventsLocationDetail);
+        eventDateText = view.findViewById(R.id.eventsDateDetail);
+        eventStartTimeText = view.findViewById(R.id.eventsTimeDetail);
 
-        eventRef.addValueEventListener(new ValueEventListener() {
+        // Attach a value event listener to the event node to populate the UI with data
+        eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    if (snapshot.getKey().equals(eventId)) {
-                        String eventName = snapshot.child("eventName").getValue(String.class);
-                        String eventOrganiser = snapshot.child("eventOrganiser").getValue(String.class);
-                        String eventLocation = snapshot.child("eventLocation").getValue(String.class);
-                        String eventCategory = snapshot.child("eventCategory").getValue(String.class);
-                        Long eventTime = snapshot.child("eventDate").child("time").getValue(Long.class);
-
-                        // Format date using SimpleDateFormat
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                        String formattedDate = sdf.format(eventTime);
-                        String eventStartTime = snapshot.child("eventStartTime").getValue(String.class);
-                        String eventParticipation = snapshot.child("eventParticipation").getValue(String.class);
-
-                        eventNameText = findViewById(R.id.eventsNameDetail);
-                        eventCategoryText = findViewById(R.id.eventsCategoryDetail);
-                        eventParticipationText = findViewById(R.id.eventsParticipationDetail);
-                        eventOrganiserText = findViewById(R.id.EventsOrganiserDetail);
-                        eventLocationText = findViewById(R.id.eventsLocationDetail);
-                        eventDateText = findViewById(R.id.eventsDateDetail);
-                        eventStartTimeText = findViewById(R.id.eventsTimeDetail);
-
-                        eventNameText.setText(eventName);
-                        eventOrganiserText.setText(eventOrganiser);
-                        eventDateText.setText(formattedDate);
-                        eventStartTimeText.setText(eventStartTime);
-                        eventParticipationText.setText(eventParticipation);
-                        eventLocationText.setText(eventLocation);
-                        eventCategoryText.setText(eventCategory);
-
-                    }
+                if (dataSnapshot.exists()) {
+                    Event event = dataSnapshot.getValue(Event.class);
+                    eventNameText.setText(event.getEventName());
+                    eventCategoryText.setText(event.getEventCategory());
+                    eventParticipationText.setText(event.getEventParticipation());
+                    eventOrganiserText.setText(event.getEventOrganiser());
+                    eventLocationText.setText(event.getEventLocation());
+                    eventStartTimeText.setText(event.getEventStartTime());
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle errors
+                // Handle error
             }
-        });
-
-//        eventRef.addValueEventListener(eventListener);
+        };
+        eventRef.addValueEventListener(eventListener);
 
         //Delete event button
-        ImageView deleteEvent = findViewById(R.id.deleteEventButton);
+        ImageView deleteEvent = view.findViewById(R.id.deleteEventButton);
         deleteEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView eventName = findViewById(R.id.eventsNameDetail);
-                Query query = eventRef.orderByChild("eventName").equalTo(eventName.toString());
+                TextView eventName = view.findViewById(R.id.eventsNameDetail);
+                Query query = eventsRef.orderByChild("eventName").equalTo(eventName.toString());
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -107,14 +87,22 @@ public class EventsDetail extends AppCompatActivity {
         });
 
         //Edit event button
-//        ImageView editEvent = findViewById(R.id.editEventButton);
-//        editEvent.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        ImageView editEvent = view.findViewById(R.id.editEventButton);
+        editEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Remove the value event listener when the fragment is destroyed
+        eventRef.removeEventListener(eventListener);
     }
 }

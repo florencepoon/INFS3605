@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +31,8 @@ public class EventsByOrganiser extends AppCompatActivity {
 
         ArrayList<String> eventOrganiserList = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
-        mRecyclerView = findViewById(R.id.eventsOrganiserRecyclerView); // replace `recyclerView` with the ID of your RecyclerView in your XML layout file
-
+        mRecyclerView = findViewById(R.id.eventsOrganiserRecyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override

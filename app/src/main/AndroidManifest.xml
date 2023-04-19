@@ -34,6 +34,9 @@
             android:name=".EventsByType"
             android:exported="true" />
         <activity
+            android:name=".FilteredLocation"
+            android:exported="true"/>
+        <activity
             android:name=".EventsDetail"
             android:exported="true" />
         <activity

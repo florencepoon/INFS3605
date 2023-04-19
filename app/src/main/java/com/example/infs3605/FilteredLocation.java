@@ -28,11 +28,12 @@ public class FilteredLocation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recycler_view_item_location);
+        setContentView(R.layout.fragment_events_by_location_filtered);
+
 
         String location = getIntent().getStringExtra("location");
 
-        mLocationTextView = findViewById(R.id.eventItemLocation);
+        mLocationTextView = findViewById(R.id.eventLocation);
         mLocationTextView.setText(location);
 
         ArrayList<Event> eventList = new ArrayList<>();

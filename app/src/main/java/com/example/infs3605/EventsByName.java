@@ -74,8 +74,4 @@ public class EventsByName extends AppCompatActivity {
         });
     }
 
-    public void launchEventsDetail() {
-        Intent intent = new Intent(this, EventsDetail.class);
-        startActivity(intent);
-    }
 }

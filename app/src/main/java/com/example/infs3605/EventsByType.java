@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,33 +21,42 @@ import java.util.Collections;
 public class EventsByType extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private EventTypeAdapter mAdapter;
+    private LocationAdapter mAdapter;
+
+    private static final String TAG = "EventsByType";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_events_by_type);
 
-        mRecyclerView = findViewById(R.id.eventsTypeRecyclerView);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        ArrayList<String> eventTypeList = new ArrayList<>();
+        ArrayList<String> typeList = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                eventTypeList.clear(); // clear the list before adding new items
+                typeList.clear(); // clear the list before adding new items
                 for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
-                    Event event;
+                    Event event = eventSnapshot.getValue(Event.class);
+                    String type = event.getEventCategory();
+                    if (!typeList.contains(type)) { // add only if not already in the list
+                        typeList.add(type);
+                    }
                 }
+                Collections.sort(typeList); // sort alphabetically
+                mAdapter = new LocationAdapter(typeList, ref);
+                mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "Error fetching data: " + error.getMessage());
             }
         });
+
+        mRecyclerView = findViewById(R.id.eventsTypeRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
