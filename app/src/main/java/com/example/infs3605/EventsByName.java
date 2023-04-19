@@ -3,6 +3,7 @@ package com.example.infs3605;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,8 +25,8 @@ public class EventsByName extends AppCompatActivity {
     private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Event> mEventList;
-
     private DatabaseReference mDatabase;
+    private RecyclerView.RecyclerListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,17 @@ public class EventsByName extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        RecyclerViewAdapter.RecyclerViewListener listener = new RecyclerViewAdapter.RecyclerViewListener() {
+            @Override
+            public void onClick(View view, String eventID1) {
+                Intent i = new Intent(EventsByName.this, EventsDetail.class);
+                i.putExtra("message", eventID1);
+                startActivity(i);
+            }
+        };
+
         // Set up the adapter
-        mAdapter = new RecyclerViewAdapter(mEventList);
+        mAdapter = new RecyclerViewAdapter(mEventList, listener);
         mRecyclerView.setAdapter(mAdapter);
 
         // Attach a listener to the Firebase database reference
@@ -73,5 +83,5 @@ public class EventsByName extends AppCompatActivity {
             }
         });
     }
-
 }
+

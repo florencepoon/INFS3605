@@ -1,7 +1,9 @@
 package com.example.infs3605;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +23,7 @@ public class EventsByOrganiser extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private EventOrganiserAdapter mAdapter;
-
+    private RecyclerView.RecyclerListener listener;
     private static final String TAG = "EventsByOrganiser";
 
     @Override
@@ -33,6 +35,16 @@ public class EventsByOrganiser extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
         mRecyclerView = findViewById(R.id.eventsOrganiserRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        EventOrganiserAdapter.ViewHolder.RecyclerViewListener listener = new EventOrganiserAdapter.ViewHolder.RecyclerViewListener() {
+            @Override
+            public void onClick(View view, String eventID1) {
+                Intent i = new Intent(EventsByOrganiser.this, EventsDetail.class);
+                i.putExtra("message", eventID1);
+                startActivity(i);
+            }
+        };
+
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -48,7 +60,7 @@ public class EventsByOrganiser extends AppCompatActivity {
                     }
                 }
                 Collections.sort(eventOrganiserList); // sort alphabetically
-                mAdapter = new EventOrganiserAdapter(eventList);
+                mAdapter = new EventOrganiserAdapter(eventList, listener);
                 mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
             }
 

@@ -13,6 +13,7 @@ import com.example.infs3605.Event;
 import com.example.infs3605.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -21,18 +22,11 @@ import java.util.Locale;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private List<Event> mEventList;
-    private OnItemClickListener mListener;
+    private RecyclerViewListener mListener;
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mListener = listener;
-    }
-
-    public RecyclerViewAdapter(List<Event> eventList) {
+    public RecyclerViewAdapter(ArrayList<Event> eventList, RecyclerViewListener listener) {
         mEventList = eventList;
+        mListener = listener;
         Collections.sort(mEventList, new EventNameComparator());
     }
 
@@ -41,7 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_view_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mListener);
     }
 
     @Override
@@ -60,35 +54,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mEventList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView mEventNameTextView;
         public TextView mEventLocationTextView;
         public TextView mEventCategoryTextView;
         public TextView mEventDateTextView;
+        public RecyclerViewListener mListener;
 
-
-        public ViewHolder(View view) {
+        public ViewHolder(@NonNull View view, RecyclerViewListener listener) {
             super(view);
+            mListener = listener;
             mEventNameTextView = view.findViewById(R.id.eventName);
             mEventLocationTextView = view.findViewById(R.id.eventLocation);
             mEventCategoryTextView = view.findViewById(R.id.eventCategory);
             mEventDateTextView = view.findViewById(R.id.eventDate);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mListener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            Event clickedEvent = mEventList.get(position);
-                            Intent intent = new Intent(v.getContext(), EventsDetail.class);
-                            intent.putExtra("creatorID", clickedEvent.getCreatorID());
-                            v.getContext().startActivity(intent);
-                        }
-                    }
-                }
-
-            });
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            mListener.onClick(view, (String) view.getTag());
+            String eventID = (String) view.getTag();
+        }
+    }
+
+    public interface RecyclerViewListener {
+        void onClick(View view, String eventID1);
     }
 
     private static class EventNameComparator implements Comparator<Event> {
@@ -97,4 +88,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             return event1.getEventName().compareToIgnoreCase(event2.getEventName());
         }
     }
+
+    public void setData(ArrayList<Event> data) {
+        mEventList.clear();
+        mEventList.addAll(data);
+        notifyDataSetChanged();
+    }
 }
+

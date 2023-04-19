@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,25 +22,28 @@ public class FilteredLocation extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private FilteredLocationAdapter mAdapter;
-    private TextView mLocationTextView;
 
-    private static final String TAG = "EventListActivity";
+    private static final String TAG = "FilteredLocation";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_events_by_location_filtered);
 
-
         String location = getIntent().getStringExtra("location");
+        TextView locationTextView = findViewById(R.id.filteredLocationTextView);
+        locationTextView.setText(location);
 
-        mLocationTextView = findViewById(R.id.eventLocation);
-        mLocationTextView.setText(location);
+        mRecyclerView = findViewById(R.id.eventsLocationFilteredRecyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ArrayList<Event> eventList = new ArrayList<>();
+        mAdapter = new FilteredLocationAdapter(eventList);
+        mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
 
-        Query query = ref.orderByChild("eventLocation").equalTo(location);
+        Query query = ref.orderByChild("EventLocation").equalTo(location);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -48,8 +52,7 @@ public class FilteredLocation extends AppCompatActivity {
                     Event event = eventSnapshot.getValue(Event.class);
                     eventList.add(event);
                 }
-                mAdapter = new FilteredLocationAdapter(eventList);
-                mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
+                mAdapter.notifyDataSetChanged(); // update the RecyclerView with new data
             }
 
             @Override

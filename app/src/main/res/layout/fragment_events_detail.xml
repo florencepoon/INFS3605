@@ -63,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
-    <EditText
+    <ImageView
         android:id="@+id/editEventButton"
         android:layout_width="31dp"
         android:layout_height="30dp"

@@ -18,35 +18,40 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class EventsByType extends AppCompatActivity {
+public class EventsByType extends AppCompatActivity implements EventTypeAdapter.OnItemClickListener {
 
     private RecyclerView mRecyclerView;
-    private LocationAdapter mAdapter;
+    private EventTypeAdapter mAdapter;
 
     private static final String TAG = "EventsByType";
+    private DatabaseReference mDatabaseRef;
+    private ValueEventListener mDBListener;
+    private ArrayList<Event> mEventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_events_by_type);
 
-        ArrayList<String> typeList = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
+        mEventList = new ArrayList<>();
+        mAdapter = new EventTypeAdapter();
 
-        ref.addValueEventListener(new ValueEventListener() {
+        mRecyclerView = findViewById(R.id.eventsTypeRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
+
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Events");
+
+        mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                typeList.clear(); // clear the list before adding new items
+                mEventList.clear();
                 for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
                     Event event = eventSnapshot.getValue(Event.class);
-                    String type = event.getEventCategory();
-                    if (!typeList.contains(type)) { // add only if not already in the list
-                        typeList.add(type);
-                    }
+                    mEventList.add(event);
                 }
-                Collections.sort(typeList); // sort alphabetically
-                mAdapter = new LocationAdapter(typeList, ref);
-                mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -54,9 +59,23 @@ public class EventsByType extends AppCompatActivity {
                 Log.d(TAG, "Error fetching data: " + error.getMessage());
             }
         });
-
-        mRecyclerView = findViewById(R.id.eventsTypeRecyclerView);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDatabaseRef.removeEventListener(mDBListener);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Event clickedEvent = mEventList.get(position);
+        ArrayList<Event> filteredList = new ArrayList<>();
+        for (Event event : mEventList) {
+            if (event.getEventCategory().equals(clickedEvent.getEventCategory())) {
+                filteredList.add(event);
+            }
+        }
+    }
+
 }

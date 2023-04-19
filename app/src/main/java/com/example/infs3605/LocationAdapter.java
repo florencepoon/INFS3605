@@ -1,6 +1,7 @@
 package com.example.infs3605;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +48,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         // add click listener to the location view
         holder.itemView.setOnClickListener(v -> {
             // query the database for events with the selected location
-            Query query = mDatabase.orderByChild("eventLocation").equalTo(location);
+            Query query = mDatabase.orderByChild("EventLocation").equalTo(location);
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -58,7 +59,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
                     }
                     // launch a new activity to display the list of events for the selected location
                     Intent intent = new Intent(holder.itemView.getContext(), FilteredLocation.class);
-                    intent.putParcelableArrayListExtra("events", (ArrayList<Event>) events);
+                    intent.putExtra("location", location);
+                    intent.putParcelableArrayListExtra("events", (ArrayList<? extends Parcelable>) events);
                     holder.itemView.getContext().startActivity(intent);
                 }
 

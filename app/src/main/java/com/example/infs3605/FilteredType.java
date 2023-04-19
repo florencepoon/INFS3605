@@ -1,4 +1,7 @@
 package com.example.infs3605;
 
-public class FilteredType {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class FilteredType extends AppCompatActivity {
+
 }
