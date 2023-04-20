@@ -1,13 +1,14 @@
 package com.example.infs3605;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,40 +19,36 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class EventsByType extends AppCompatActivity implements EventTypeAdapter.OnItemClickListener {
+public class EventsByType extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private EventTypeAdapter mAdapter;
-
+    private TypeAdapter mAdapter;
     private static final String TAG = "EventsByType";
-    private DatabaseReference mDatabaseRef;
-    private ValueEventListener mDBListener;
-    private ArrayList<Event> mEventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_events_by_type);
 
-        mEventList = new ArrayList<>();
-        mAdapter = new EventTypeAdapter();
+        ArrayList<String> eventTypeList = new ArrayList<>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
 
-        mRecyclerView = findViewById(R.id.eventsTypeRecyclerView);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mAdapter);
-
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Events");
-
-        mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mEventList.clear();
+                ArrayList<Event> eventList = new ArrayList<>();
+                eventTypeList.clear(); // clear the list before adding new items
                 for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
                     Event event = eventSnapshot.getValue(Event.class);
-                    mEventList.add(event);
+                    eventList.add(event);
+                    String type = event.getEventCategory();
+                    if (!eventTypeList.contains(type)) { // add only if not already in the list
+                        eventTypeList.add(type);
+                    }
                 }
-                mAdapter.notifyDataSetChanged();
+                Collections.sort(eventTypeList); // sort alphabetically
+                mAdapter = new TypeAdapter(eventTypeList, ref);
+                mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
             }
 
             @Override
@@ -59,23 +56,8 @@ public class EventsByType extends AppCompatActivity implements EventTypeAdapter.
                 Log.d(TAG, "Error fetching data: " + error.getMessage());
             }
         });
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mDatabaseRef.removeEventListener(mDBListener);
+        mRecyclerView = findViewById(R.id.eventsTypeRecyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
-    @Override
-    public void onItemClick(int position) {
-        Event clickedEvent = mEventList.get(position);
-        ArrayList<Event> filteredList = new ArrayList<>();
-        for (Event event : mEventList) {
-            if (event.getEventCategory().equals(clickedEvent.getEventCategory())) {
-                filteredList.add(event);
-            }
-        }
-    }
-
 }

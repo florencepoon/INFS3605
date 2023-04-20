@@ -1,6 +1,7 @@
 package com.example.infs3605;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +26,8 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.ViewHolder> {
     private List<String> mTypeList;
     private DatabaseReference mDatabase;
 
-    public TypeAdapter(ArrayList<String> locationList, DatabaseReference database) {
-        mTypeList = locationList;
+    public TypeAdapter(ArrayList<String> typeList, DatabaseReference database) {
+        mTypeList = typeList;
         mDatabase = database;
         Collections.sort(mTypeList); // sort alphabetically
     }
@@ -44,9 +45,9 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.ViewHolder> {
         String type = mTypeList.get(position);
         holder.mTypeTextView.setText(type);
 
-        // add click listener to the location view
+        // add click listener to the category view
         holder.itemView.setOnClickListener(v -> {
-            // query the database for events with the selected location
+            // query the database for events with the selected category
             Query query = mDatabase.orderByChild("eventCategory").equalTo(type);
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -57,8 +58,9 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.ViewHolder> {
                         events.add(event);
                     }
                     // launch a new activity to display the list of events for the selected location
-                    Intent intent = new Intent(holder.itemView.getContext(), FilteredLocation.class);
-                    intent.putParcelableArrayListExtra("events", (ArrayList<Event>) events);
+                    Intent intent = new Intent(holder.itemView.getContext(), FilteredType.class);
+                    intent.putExtra("type", type);
+                    intent.putParcelableArrayListExtra("events", (ArrayList<? extends Parcelable>) events);
                     holder.itemView.getContext().startActivity(intent);
                 }
 

@@ -22,7 +22,6 @@ public class EventsByLocation extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private LocationAdapter mAdapter;
-
     private static final String TAG = "EventsByLocation";
 
     @Override
