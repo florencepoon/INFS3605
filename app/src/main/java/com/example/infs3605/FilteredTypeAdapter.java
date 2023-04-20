@@ -12,82 +12,67 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class FilteredTypeAdapter extends RecyclerView.Adapter<FilteredTypeAdapter.ViewHolder> {
-    private ArrayList<Event> mEvents;
-    private RecyclerViewAdapter.RecyclerViewListener mListener;
-    private String mCategory;
+public class FilteredTypeAdapter extends RecyclerView.Adapter<FilteredTypeAdapter.FilteredTypeViewHolder> {
 
-    public FilteredTypeAdapter(ArrayList<Event> events, RecyclerViewAdapter.RecyclerViewListener listener, String category) {
-        mEvents = events;
-        mListener = listener;
-        mCategory = category;
+    private ArrayList<Event> mEventList;
+    private RecyclerViewListener mListener;
+    private String mEventType;
+
+    public interface RecyclerViewListener {
+        void onClick(View view, String eventID);
     }
 
-    //Linking the xml layout file as the RecyclerView item
+    public FilteredTypeAdapter(ArrayList<Event> eventList, RecyclerViewListener listener, String eventType) {
+        mEventList = eventList;
+        mListener = listener;
+        mEventType = eventType;
+    }
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false);
-        return new ViewHolder(view, mListener);
+    public FilteredTypeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false);
+        FilteredTypeViewHolder evh = new FilteredTypeViewHolder(v, mListener);
+        return evh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FilteredTypeAdapter.ViewHolder holder, int position) {
-        Event event = mEvents.get(position);
-        if (event.getEventCategory().equals(mCategory)) {
-            holder.mName.setText(event.getEventName());
-            holder.mCategory.setText(event.getEventCategory());
-            holder.mLocation.setText(event.getEventLocation());
-            holder.itemView.setTag(event.getEventID1());
+    public void onBindViewHolder(@NonNull FilteredTypeViewHolder holder, int position) {
+        Event currentEvent = mEventList.get(position);
+        holder.mTextViewEventName.setText(currentEvent.getEventName());
+        holder.mTextViewEventLocation.setText(currentEvent.getEventLocation());
+        holder.mTextViewEventType.setText(currentEvent.getEventCategory());
 
-            // Format date using SimpleDateFormat
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            String formattedDate = sdf.format(event.getEventDate());
-            holder.mDate.setText(formattedDate);
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String formattedDate = sdf.format(currentEvent.getEventDate());
+        holder.mTextViewEventDate.setText(formattedDate);
     }
 
-    //Mapping event data to recyclerview
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mName, mCategory, mLocation, mDate;
-        public RecyclerViewAdapter.RecyclerViewListener mListener;
+    @Override
+    public int getItemCount() {
+        return mEventList.size();
+    }
 
-        public ViewHolder(@NonNull View itemView, RecyclerViewAdapter.RecyclerViewListener listener) {
+    public static class FilteredTypeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView mTextViewEventName;
+        public TextView mTextViewEventType;
+        public TextView mTextViewEventDate;
+        public TextView mTextViewEventLocation;
+        public RecyclerViewListener mListener;
+
+        public FilteredTypeViewHolder(@NonNull View itemView, RecyclerViewListener listener) {
             super(itemView);
             mListener = listener;
-            mName = itemView.findViewById(R.id.eventName);
-            mCategory = itemView.findViewById(R.id.eventCategory);
-            mLocation = itemView.findViewById(R.id.eventLocation);
-            mDate = itemView.findViewById(R.id.eventDate);
+            mTextViewEventName = itemView.findViewById(R.id.eventName);
+            mTextViewEventDate = itemView.findViewById(R.id.eventDate);
+            mTextViewEventType = itemView.findViewById(R.id.eventCategory);
+            mTextViewEventLocation = itemView.findViewById(R.id.eventLocation);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            mListener.onClick(view, (String) view.getTag());
-            String eventID = (String) view.getTag();
+            mListener.onClick(view, String.valueOf(getAdapterPosition()));
         }
-    }
-
-    public interface RecyclerViewListener {
-        void onClick(View view, String eventID1);
-    }
-
-    @Override
-    public int getItemCount() {
-        int count = 0;
-        for (Event event : mEvents) {
-            if (event.getEventCategory().equals(mCategory)) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    //Supplying data to the adapter
-    public void setData(ArrayList<Event> data) {
-        mEvents.clear();
-        mEvents.addAll(data);
-        notifyDataSetChanged();
     }
 }

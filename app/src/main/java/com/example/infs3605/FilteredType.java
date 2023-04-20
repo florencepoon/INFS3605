@@ -24,8 +24,6 @@ public class FilteredType extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private FilteredTypeAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView.RecyclerListener listener;
     private DatabaseReference mDatabase;
 
     private static final String TAG = "FilteredType";
@@ -42,15 +40,16 @@ public class FilteredType extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.eventsTypeFilteredRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        RecyclerViewAdapter.RecyclerViewListener listener = new RecyclerViewAdapter.RecyclerViewListener() {
+        FilteredTypeAdapter.RecyclerViewListener listener = new FilteredTypeAdapter.RecyclerViewListener() {
             @Override
-            public void onClick(View view, String eventID1) {
+            public void onClick(View view, String eventID) {
                 Intent i = new Intent(FilteredType.this, EventsDetail.class);
-                i.putExtra("message", eventID1);
+                i.putExtra("message", eventID);
                 startActivity(i);
             }
         };
-        String type = getIntent().getStringExtra("category");
+
+        String type = getIntent().getStringExtra("Category");
         TextView typeTextView = findViewById(R.id.filteredTypeTextView);
         typeTextView.setText(type);
 

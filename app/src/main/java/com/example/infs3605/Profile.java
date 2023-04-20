@@ -1,5 +1,7 @@
 package com.example.infs3605;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,12 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends Fragment {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private AlertDialog logoutDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,10 +51,7 @@ public class Profile extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signOut();
-                Intent intent = new Intent(getActivity(), LandingPage.class);
-                startActivity(intent);
-                getActivity().finish();
+                logout();
             }
         });
 
@@ -75,5 +75,47 @@ public class Profile extends Fragment {
         });
 
         return view;
+    }
+
+    private void logout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Logout");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mAuth.signOut();
+                Intent intent = new Intent(getActivity(), LandingPage.class);
+                startActivity(intent);
+                getActivity().finish();
+                // show a success message to the user
+                Toast.makeText(getContext(), "You have been logged out successfully.", Toast.LENGTH_SHORT).show();
+                dialog.dismiss(); // dismiss the dialog
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); // dismiss the dialog
+            }
+        });
+
+        logoutDialog = builder.create();
+        logoutDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                logoutDialog = null;
+            }
+        });
+        logoutDialog.show();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (logoutDialog != null && logoutDialog.isShowing()) {
+            logoutDialog.dismiss();
+        }
     }
 }
