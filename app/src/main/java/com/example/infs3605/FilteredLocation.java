@@ -1,7 +1,9 @@
 package com.example.infs3605;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,18 +32,28 @@ public class FilteredLocation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_events_by_location_filtered);
 
-        String location = getIntent().getStringExtra("location");
-        TextView locationTextView = findViewById(R.id.filteredLocationTextView);
-        locationTextView.setText(location);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
+
+        ArrayList<Event> eventList = new ArrayList<>();
 
         mRecyclerView = findViewById(R.id.eventsLocationFilteredRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<Event> eventList = new ArrayList<>();
-        mAdapter = new FilteredLocationAdapter(eventList);
-        mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
+        FilteredLocationAdapter.RecyclerViewListener listener = new FilteredLocationAdapter.RecyclerViewListener() {
+            @Override
+            public void onClick(View view, String eventID) {
+                Intent i = new Intent(FilteredLocation.this, EventsDetail.class);
+                i.putExtra("message", eventID);
+                startActivity(i);
+            }
+        };
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
+        String location = getIntent().getStringExtra("location");
+        TextView locationTextView = findViewById(R.id.filteredLocationTextView);
+        locationTextView.setText(location);
+
+        mAdapter = new FilteredLocationAdapter(eventList, listener);
+        mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
 
         Query query = ref.orderByChild("EventLocation").equalTo(location);
         query.addValueEventListener(new ValueEventListener() {
