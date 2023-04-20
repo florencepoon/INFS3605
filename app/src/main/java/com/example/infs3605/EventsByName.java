@@ -65,6 +65,7 @@ public class EventsByName extends AppCompatActivity {
                 mEventList.clear();
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     Event event = eventSnapshot.getValue(Event.class);
+                    event.setEventID1(eventSnapshot.getKey());
                     mEventList.add(event);
                 }
                 Collections.sort(mEventList, new Comparator<Event>() {

@@ -47,6 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String formattedDate = dateFormat.format(event.getEventDate());
         holder.mEventDateTextView.setText(formattedDate);
+        holder.itemView.setTag(event.getEventID1());
     }
 
     @Override
