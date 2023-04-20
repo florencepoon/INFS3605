@@ -53,6 +53,7 @@ public class EventsByOrganiser extends AppCompatActivity {
                 eventOrganiserList.clear(); // clear the list before adding new items
                 for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
                     Event event = eventSnapshot.getValue(Event.class);
+                    event.setEventID1(eventSnapshot.getKey());
                     eventList.add(event);
                     String organiser = event.getEventOrganiser();
                     if (!eventOrganiserList.contains(organiser)) { // add only if not already in the list

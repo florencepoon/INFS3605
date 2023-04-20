@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -45,6 +46,8 @@ public class EventOrganiserAdapter extends RecyclerView.Adapter<EventOrganiserAd
         holder.mEventNameTextView.setText(event.getEventName());
         holder.mEventLocationTextView.setText(event.getEventLocation());
         holder.mEventCategoryTextView.setText(event.getEventCategory());
+        holder.itemView.setTag(event.getEventID1());
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String formattedDate = dateFormat.format(event.getEventDate());
         holder.mEventDateTextView.setText(formattedDate);

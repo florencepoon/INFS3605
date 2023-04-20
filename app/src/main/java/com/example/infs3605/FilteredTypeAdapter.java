@@ -42,6 +42,7 @@ public class FilteredTypeAdapter extends RecyclerView.Adapter<FilteredTypeAdapte
         holder.mTextViewEventName.setText(currentEvent.getEventName());
         holder.mTextViewEventLocation.setText(currentEvent.getEventLocation());
         holder.mTextViewEventType.setText(currentEvent.getEventCategory());
+        holder.itemView.setTag(currentEvent.getEventID1());
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String formattedDate = sdf.format(currentEvent.getEventDate());
@@ -72,7 +73,9 @@ public class FilteredTypeAdapter extends RecyclerView.Adapter<FilteredTypeAdapte
 
         @Override
         public void onClick(View view) {
-            mListener.onClick(view, String.valueOf(getAdapterPosition()));
+            mListener.onClick(view, (String) view.getTag());
+            String eventID = (String) view.getTag();
         }
+
     }
 }

@@ -36,6 +36,8 @@ public class FilteredLocationAdapter extends RecyclerView.Adapter<FilteredLocati
         holder.mNameTextView.setText(event.getEventName());
         holder.mCategoryTextView.setText(event.getEventCategory());
         holder.mLocationTextView.setText(event.getEventLocation());
+        holder.itemView.setTag(event.getEventID1());
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String formattedDate = dateFormat.format(event.getEventDate());
         holder.mDateTextView.setText(formattedDate);

@@ -63,6 +63,7 @@ public class FilteredType extends AppCompatActivity {
                 eventList.clear(); // clear the list before adding new items
                 for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
                     Event event = eventSnapshot.getValue(Event.class);
+                    event.setEventID1(eventSnapshot.getKey());
                     eventList.add(event);
                 }
                 mAdapter.notifyDataSetChanged(); // update the RecyclerView with new data
