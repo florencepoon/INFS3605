@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc1743b5-7233-450e-b1e6-4bf9f0d25937" name="Changes" comment="trying to get byType filter working bc it's broken ??">
+    <list default="true" id="bc1743b5-7233-450e-b1e6-4bf9f0d25937" name="Changes" comment="1/2 byType filter working">
       <change beforePath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.bin" afterDir="false" />
@@ -17,9 +17,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByType.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/TypeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/TypeAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredType.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredTypeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredTypeAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events_by_type_filtered.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events_by_type_filtered.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681947150754</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="1/2 byType filter working">
+      <created>1681953889922</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1681953889922</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -376,6 +385,7 @@
     <MESSAGE value="can change to the filtered events pages" />
     <MESSAGE value="last few fixes" />
     <MESSAGE value="trying to get byType filter working bc it's broken ??" />
-    <option name="LAST_COMMIT_MESSAGE" value="trying to get byType filter working bc it's broken ??" />
+    <MESSAGE value="1/2 byType filter working" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/2 byType filter working" />
   </component>
 </project>

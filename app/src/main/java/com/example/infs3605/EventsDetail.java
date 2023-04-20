@@ -27,7 +27,7 @@ import java.util.Locale;
 public class EventsDetail extends AppCompatActivity {
     private TextView eventNameText, eventCategoryText, eventParticipationText, eventOrganiserText, eventLocationText, eventStartTimeText, eventDateText;
     private String mEventID;
-    private Event mEvent;
+    private Event Event;
     DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().child("Events");
 
     @Override
@@ -76,7 +76,8 @@ public class EventsDetail extends AppCompatActivity {
                     }
                 }
             }
-                    @Override
+
+            @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle errors
             }
@@ -87,21 +88,8 @@ public class EventsDetail extends AppCompatActivity {
         deleteEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView eventName = findViewById(R.id.eventsNameDetail);
-                Query query = eventRef.orderByChild("eventName").equalTo(eventName.toString());
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
-                            eventSnapshot.getRef().removeValue();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Handle error
-                    }
-                });
+                eventRef.child(mEventID).removeValue();
+                finish(); // close the activity after deleting the event
             }
         });
 
@@ -122,13 +110,13 @@ public class EventsDetail extends AppCompatActivity {
         EditText mEventTimeEditText = findViewById(R.id.eventsTimeDetail);
 
         // Update the event object with the new data
-        mEvent.setEventName(mEventNameEditText.getText().toString());
-        mEvent.setEventLocation(mEventLocationEditText.getText().toString());
-        mEvent.setEventCategory(mEventCategoryEditText.getText().toString());
-        mEvent.setEventStartTime(mEventTimeEditText.getText().toString());
+        Event.setEventName(mEventNameEditText.getText().toString());
+        Event.setEventLocation(mEventLocationEditText.getText().toString());
+        Event.setEventCategory(mEventCategoryEditText.getText().toString());
+        Event.setEventStartTime(mEventTimeEditText.getText().toString());
 
         // Save the updated event in Firebase
-        eventRef.child(mEventID).setValue(mEvent)
+        eventRef.child(Event.getCreatorID()).setValue(Event)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
