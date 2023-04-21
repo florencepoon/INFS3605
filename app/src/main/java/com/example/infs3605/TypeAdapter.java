@@ -25,11 +25,17 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.ViewHolder> {
 
     private List<String> mTypeList;
     private DatabaseReference mDatabase;
+    private RecyclerViewListener mListener;
 
-    public TypeAdapter(ArrayList<String> typeList, DatabaseReference database) {
+    public TypeAdapter(ArrayList<String> typeList, DatabaseReference database, RecyclerViewListener listener) {
         mTypeList = typeList;
+        mListener = listener;
         mDatabase = database;
         Collections.sort(mTypeList); // sort alphabetically
+    }
+
+    public interface RecyclerViewListener {
+        void onClick(View view, int position);
     }
 
     @NonNull
@@ -37,7 +43,7 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_view_item_type, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mListener);
     }
 
     @Override
@@ -78,12 +84,19 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.ViewHolder> {
         return mTypeList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView mTypeTextView;
+        public RecyclerViewListener mListener;
 
-        public ViewHolder(View view) {
+        public ViewHolder(@NonNull View view, RecyclerViewListener listener) {
             super(view);
             mTypeTextView = view.findViewById(R.id.eventItemType);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            mListener.onClick(view, getAdapterPosition());
         }
     }
 }

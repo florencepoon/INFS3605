@@ -9,9 +9,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc1743b5-7233-450e-b1e6-4bf9f0d25937" name="Changes" comment="event details are working ! yay">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredLocationAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredLocationAdapter.java" afterDir="false" />
+    <list default="true" id="bc1743b5-7233-450e-b1e6-4bf9f0d25937" name="Changes" comment="event details all passing properly">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByType.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredType.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/LocationAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/LocationAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/TypeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/TypeAdapter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -352,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682017122673</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="event details all passing properly">
+      <created>1682017982084</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1682017982084</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -367,7 +381,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changing nav bar" />
     <MESSAGE value="profile UI/UX done" />
     <MESSAGE value="logout COMPLETE" />
     <MESSAGE value="working on recycler view ver1.0" />
@@ -392,6 +405,7 @@
     <MESSAGE value="1/2 byType filter working" />
     <MESSAGE value="confirm logic heuristic" />
     <MESSAGE value="event details are working ! yay" />
-    <option name="LAST_COMMIT_MESSAGE" value="event details are working ! yay" />
+    <MESSAGE value="event details all passing properly" />
+    <option name="LAST_COMMIT_MESSAGE" value="event details all passing properly" />
   </component>
 </project>

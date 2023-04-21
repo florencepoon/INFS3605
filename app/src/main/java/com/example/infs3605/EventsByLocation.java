@@ -1,5 +1,6 @@
 package com.example.infs3605;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,7 +46,15 @@ public class EventsByLocation extends AppCompatActivity {
                     }
                 }
                 Collections.sort(locationList); // sort alphabetically
-                mAdapter = new LocationAdapter(locationList, ref);
+                mAdapter = new LocationAdapter (locationList, ref, new LocationAdapter.RecyclerViewListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Intent intent = new Intent(EventsByLocation.this, FilteredLocation.class);
+                        intent.putExtra("location", locationList.get(position));
+                        startActivity(intent);
+                    }
+                });
+
                 mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
             }
 

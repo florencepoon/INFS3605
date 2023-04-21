@@ -1,6 +1,7 @@
 package com.example.infs3605;
 
 import android.content.Intent;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,7 +48,15 @@ public class EventsByType extends AppCompatActivity {
                     }
                 }
                 Collections.sort(eventTypeList); // sort alphabetically
-                mAdapter = new TypeAdapter(eventTypeList, ref);
+                mAdapter = new TypeAdapter(eventTypeList, ref, new TypeAdapter.RecyclerViewListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Intent intent = new Intent(EventsByType.this, FilteredType.class);
+                        intent.putExtra("type", eventList.get(position));
+                        startActivity(intent);
+                    }
+                });
+
                 mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
             }
 

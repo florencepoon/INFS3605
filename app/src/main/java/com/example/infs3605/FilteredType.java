@@ -49,13 +49,14 @@ public class FilteredType extends AppCompatActivity {
             }
         };
 
-        String type = getIntent().getStringExtra("Category");
+        String type = getIntent().getStringExtra("type"); // get the type from intent extra
         TextView typeTextView = findViewById(R.id.filteredTypeTextView);
         typeTextView.setText(type);
 
         mAdapter = new FilteredTypeAdapter(eventList, listener, type);
         mRecyclerView.setAdapter(mAdapter); // set the adapter to the RecyclerView
 
+        // query the database to retrieve events with matching EventCategory value
         Query query = mDatabase.orderByChild("EventCategory").equalTo(type);
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -75,4 +76,5 @@ public class FilteredType extends AppCompatActivity {
             }
         });
     }
+
 }

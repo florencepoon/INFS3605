@@ -25,10 +25,12 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
     private List<String> mLocationList;
     private DatabaseReference mDatabase;
+    private RecyclerViewListener mListener;
 
-    public LocationAdapter(ArrayList<String> locationList, DatabaseReference database) {
+    public LocationAdapter(ArrayList<String> locationList, DatabaseReference database, RecyclerViewListener listener) {
         mLocationList = locationList;
         mDatabase = database;
+        mListener = listener;
         Collections.sort(mLocationList); // sort alphabetically
     }
 
@@ -78,12 +80,23 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         return mLocationList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView mLocationTextView;
+        public RecyclerViewListener mListener;
 
         public ViewHolder(View view) {
             super(view);
             mLocationTextView = view.findViewById(R.id.eventItemLocation);
+            view.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            mListener.onClick(view, getAdapterPosition());
+        }
+    }
+
+    public interface RecyclerViewListener {
+        void onClick(View view, int position);
     }
 }
