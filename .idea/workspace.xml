@@ -9,16 +9,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc1743b5-7233-450e-b1e6-4bf9f0d25937" name="Changes" comment="event details all passing properly">
+    <list default="true" id="bc1743b5-7233-450e-b1e6-4bf9f0d25937" name="Changes" comment="can't fix the last bit of the filtering process">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/recycler_view_item_location_filtered.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByType.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/EventsByType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredType.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/FilteredType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/LocationAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/LocationAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/TypeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/infs3605/TypeAdapter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,25 +93,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DEBUGGABLE_DEVICE&quot;: &quot;Pixel_3a_API_UpsideDownCake [emulator-5554]&quot;,
-    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.example.infs3605&quot;,
-    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
-    &quot;ResourceManagerPrefKey.ModuleName&quot;: &quot;INFS3605.app.main&quot;,
-    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;COLOR&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/bryangunawan/Documents/GitHub/INFS3605&quot;,
-    &quot;memory.settings.postsync.last.time.stamp&quot;: &quot;1680997354398&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ApkExportedModule": "INFS3605.app",
+    "BundleExportedModule": "INFS3605.app",
+    "DEBUGGABLE_DEVICE": "Pixel_3a_API_UpsideDownCake [emulator-5554]",
+    "DEBUGGABLE_PROCESS": "com.example.infs3605",
+    "DEBUGGER_ID": "Auto",
+    "ResourceManagerPrefKey.ModuleName": "INFS3605.app.main",
+    "ResourceManagerPrefKey.ResourceType": "COLOR",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SHOW_ALL_PROCESSES": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "last_opened_file_path": "/Users/bryangunawan/Documents/GitHub/INFS3605",
+    "memory.settings.postsync.last.time.stamp": "1680997354398",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.infs3605" />
@@ -366,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682017982084</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="can't fix the last bit of the filtering process">
+      <created>1682052744773</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1682052744773</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -381,7 +385,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="profile UI/UX done" />
     <MESSAGE value="logout COMPLETE" />
     <MESSAGE value="working on recycler view ver1.0" />
     <MESSAGE value="linking event pages together" />
@@ -406,6 +409,7 @@
     <MESSAGE value="confirm logic heuristic" />
     <MESSAGE value="event details are working ! yay" />
     <MESSAGE value="event details all passing properly" />
-    <option name="LAST_COMMIT_MESSAGE" value="event details all passing properly" />
+    <MESSAGE value="can't fix the last bit of the filtering process" />
+    <option name="LAST_COMMIT_MESSAGE" value="can't fix the last bit of the filtering process" />
   </component>
 </project>

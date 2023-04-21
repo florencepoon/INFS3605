@@ -27,7 +27,7 @@ public class FilteredLocationAdapter extends RecyclerView.Adapter<FilteredLocati
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the view for a single event item
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view_item, parent, false);
+                .inflate(R.layout.recycler_view_item_location_filtered, parent, false);
         return new EventViewHolder(itemView, mListener);
     }
 
@@ -59,10 +59,10 @@ public class FilteredLocationAdapter extends RecyclerView.Adapter<FilteredLocati
 
         public EventViewHolder(@NonNull View itemView, RecyclerViewListener listener) {
             super(itemView);
-            mNameTextView = itemView.findViewById(R.id.eventName);
-            mCategoryTextView = itemView.findViewById(R.id.eventCategory);
-            mLocationTextView = itemView.findViewById(R.id.eventLocation);
-            mDateTextView = itemView.findViewById(R.id.eventDate);
+            mNameTextView = itemView.findViewById(R.id.rvLocationEventName);
+            mCategoryTextView = itemView.findViewById(R.id.rvLocationEventCategory);
+            mLocationTextView = itemView.findViewById(R.id.rvEventLocation);
+            mDateTextView = itemView.findViewById(R.id.rvLocationEventDate);
             itemView.setOnClickListener(this);
         }
         @Override
